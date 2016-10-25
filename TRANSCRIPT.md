@@ -8,37 +8,47 @@ https://zachholman.com/talk/move-fast-break-nothing/
 People presentation
 Describe you
 Describe "Refactoring Legacy Code" initiative
-TODO: look at avanscoperta's course page
   - various kind of tests
   - refactoring
   - raise your confidence
   - tiny steps
   - 2 minutes to commit
   - fast feedback loop
-
-## Inherit codebase
-Get repository
-	TODO: fix me (from git and from where?)
-	hg clone 'https://kiln.yoox.net/kiln/Code/KYSS/Group/fighting-legacy-code-csharp'.
-Open solution.
-Build solution.
-Run application.
-Make your own branch.
-Never push nothing!! (Revoke push permission)
+  - break dependencies
+  - isolating moving parts
 
 ## Introduction to Refactoring
 More important of what is when.
 When refactor?
 When you have to add a feature to a program, and the code is not structured in a convenient way to add that feature.
 First refactor the program to make it easy to add the feature, then add the feature.
-Refactoring must be applied in order to reduce maintanability costs.
+Refactoring must be applied in order to reduce maintanability costs (aka not increase the crap)
 What is refactoring?
 Refactoring is the process of restructuring code without changing its external behavior.
-Refactoring improves only nonfunctional attributes of the software.
+Refactoring improves only nonfunctional (quality, performance, etc) attributes of the software.
 How can we know that we didn't change anything?
 We need to cover the application code with automatic tests
 With legacy application it's particular kind of tests.
 We want write application end-to-end tests also knows as Characterization Tests.
+
+TODO: add or not?
+## Quick FizzBuzz Demo
+Get FizzBuzz
+	https://drive.google.com/drive/folders/0B72Hr4IhXoCkNWlqQVVQNmN0ZkE
+Open, build and run solution.
+Run tests.
+Add divisible by 7 print "Yo!".
+Easy way, ifs expolosion.
+Refactoring way make code reusable.
+Now easy and clean way.
+
+## Inherit codebase
+Get Trivia
+	https://drive.google.com/drive/folders/0B72Hr4IhXoCkNWlqQVVQNmN0ZkE
+Open, build and run solution.
+Execute git init
+Execute git add . -A
+Execute git commit -m "Inherited mess :-)"
 
 ## New Requirement
 Trivia is a trivial pursuite game simulation.
@@ -50,13 +60,14 @@ In other words we add more duplications and more debit
 But we can do better we can refactor the codebase!! :-)
 
 ## Testing strategy
+Refactor whitout tests? Bad idea!
 We want write application end-to-end tests also knows as Characterization Tests.
 This Characterization tests freeze current behaviour.
 We can use application output to help us write simpler Characterization tests.
 The idea is very simple:
   - grab and store many sampled output and use it for future verifications.
   - if the output was changed the behaviour was changed too.
-The initial grabbed output is formerly knows as Golden Master.
+The initial grabbed output is commonly knows as Golden Master.
 This isn't the only way to write this Characterization tests.
 It isn't 100% regression bug free, but can rich a good level with low effort.
 
@@ -69,13 +80,14 @@ Fix "TryTestRunner" test and get Green Bar
 Explore application as black-box.
 Add a SpikeTests class in same project.
 Write a test that execute GameRunner.Main(null).
+Exception? No/ Great!
 Where output came from? Logger? Trace? Console? Looking for it.
-Find All 'console.write' in order to verify if app directly write to Console
+Find All 'console.write' in order to verify if app directly write to Console.
 I need to grab output. How I can? Possible solutions:
-	- replace all Console.WriteLine with a call to a custom logger
-	- execute app via Process class and redirect output
 	- execute app and redirect output via shell script
-	- set Console.Out to a in memory stream
+	- execute app via Process class and redirect output
+	- replace all Console.WriteLine with a call to a custom logger
+	- set Console.Out to a own file/memory stream
 Change test Console.SetOut(new StringWriter()) and Assert.Equal("", output);
 
 ## Is output deterministic?
@@ -91,8 +103,7 @@ Open ScriptCS
 Show that a Random with same seed produce every time same sequence of values.
 How can we get rid of it? Possible solutions:
 	- input args (high impact, error prone due to if (args == null))
-	- slice (as is, isn't possible due to static constraint on Main)
-	- new runner object than slice (medium impact, all done with refactoring move)
+	- slice (medium impact, all done with refactoring move)
 	- peel (low impact)
 Implement peel, push up random variable.
 Extract Run method.
@@ -106,7 +117,8 @@ Run same test with seed from zero to two.
 Run with Code Coverage Tool.
 Run same test with seed from zero to one thousand.
 Run with Code Coverage Tool.
-Copy output.txt into ..\..\golden-aster.txt.
+Use linear function to generate spread seed.
+Copy output.txt into ..\..\golden-master.txt.
 Commit gorlden-master.txt file.
 
 ## Write Characterization Test
