@@ -119,6 +119,7 @@ Run same test with seed from zero to one thousand.
 Run with Code Coverage Tool.
 Use linear function to generate spread seed.
 Copy output.txt into ..\..\golden-master.txt.
+To do always with manual intervention.
 Commit gorlden-master.txt file.
 
 ## Write Characterization Test
