@@ -29,7 +29,7 @@ Refactoring improves only nonfunctional (quality, performance, etc) attributes o
 How can we know that we didn't change anything?
 We need to cover the application code with automatic tests
 With legacy application it's particular kind of tests.
-We want write application end-to-end tests also knows as Characterization Tests.
+We want write application tests also knows as Characterization Tests.
 
 TODO: add or not?
 ## Quick FizzBuzz Demo
@@ -65,11 +65,12 @@ We want write application end-to-end tests also knows as Characterization Tests.
 This Characterization tests freeze current behaviour.
 We can use application output to help us write simpler Characterization tests.
 The idea is very simple:
-  - grab and store many sampled output and use it for future verifications.
+  - grab and store output and use it for future verifications.
   - if the output was changed the behaviour was changed too.
 The initial grabbed output is commonly knows as Golden Master.
 This isn't the only way to write this Characterization tests.
 It isn't 100% regression bug free, but can rich a good level with low effort.
+The quality of this kind of tests depends by the quality of input data.
 
 ## Setup Tests
 Install-Package NUnit/xUnit
@@ -92,7 +93,7 @@ Change test Console.SetOut(new StringWriter()) and Assert.Equal("", output);
 
 ## Is output deterministic?
 Redirect output from memory to file.
-Run game tests many times.
+Run tests many times, each one on different file.
 Are the results equals? Compare with diff tool.
 Show that tests aren't deterministic.
 Why? Possible causes? Input? DateTime? Db?
@@ -101,7 +102,7 @@ Find All 'random'.
 ## Isolate Randomness
 Open ScriptCS
 Show that a Random with same seed produce every time same sequence of values.
-How can we get rid of it? Possible solutions:
+How can we get rid of Random? Possible solutions:
 	- input args (high impact, error prone due to if (args == null))
 	- slice (medium impact, all done with refactoring move)
 	- peel (low impact)
@@ -115,9 +116,8 @@ Run game test with seed equal to zero.
 Run with Code Coverage Tool.
 Run same test with seed from zero to two.
 Run with Code Coverage Tool.
-Run same test with seed from zero to one thousand.
+Run same test linear function to generate spread seed.
 Run with Code Coverage Tool.
-Use linear function to generate spread seed.
 Copy output.txt into ..\..\golden-master.txt.
 To do always with manual intervention.
 Commit gorlden-master.txt file.
@@ -134,20 +134,16 @@ Clean up test code.
 
 # EPISODE 2
 
-## Refactoring Recap
-Refactoring is the process of restructuring code without changing its external behavior.
-We refactor the program to make it easy to add the feature, then add the feature.
-Refactoring must be applied in order to reduce maintanability costs.
-The set of inconvenient way is called bad code smell.
-
 ## Bad Code Smell
+We do when have to add a feature to a program, and the code is not structured in a convenient way.
+The set of inconvenient way is called bad code smell.
 The Martin Fowler's Refactoring Book list 22 Code Smells, of various scope from methods to classes.
 There are other books that define different smells or same smells with different names.
-With every smell is associated a list of possible refactoring move.
+With every smell is associated a list of possible refactoring.
 Except some special refactoring, we can divide it in three basic movements: extract, inline and move.
 This basic refactoring are at the heart of bigger refactoring, we sum little behaviour to get bigger behaviour.
 Most of the time before get the final design we pass through various intermediate steps that increase the level of dirtiness of the code.
-Sometimes which refactoring is better in which case, is difficult to say, it depends, so we use heuristics.
+Sometimes which refactoring is better in which case, is difficult to say, it depends, so we use heuristics or prototypes.
 Another aspect is that smells and refactoring was born into OOP circle.
 Nothing stop to find smells and apply refactoring related to different programming paradigms like FP or other NFR aspect like performance.
 
@@ -180,21 +176,21 @@ Conditional Complexity: roll(int roll), wasCorrectlyAnswered().
 ## Remember the new requirement
 Handle History category.
 We have many smells related to questions logic.
-The primary is Shotgun Surgery.
-But directly work inside Game class is difficult and risky.
+The primary is Shotgun Surgery, then Data Clumps and unmissable Primitive Obsession.
+But directly work inside Game class is difficult and even worst risky.
 We can do better, we can first solve Data Clump and extract questions logic.
 Then we can works with the new little surface.
 At beginning we want favour refactoring that reduce the scope in order to hide complexity.
 Add TODO file with Data Clump and Shotgun Surgery categories.
 Focus is really important during refactoring in order to don't introduce regression.
 
-## Questionnaire Born
+## QuestionDeck Born
 Target move questions related code, as is, into a new class.
 Remember:
 	1) Commit frequently.
 	2) Run tests frequently.
 	3) Stay focused.
-Add empty class Questionnaire.
+Add empty class QuestionDeck.
 Add readonly field in Game.
 
 ## Try Attack FillQuestions
@@ -217,10 +213,10 @@ Create a bottleneck, not another Shotgun Surgery.
 The logic is difficult to move around for two reason:
 	1) is in the ctor
 Fix 1, select all code and then Extract Method 'FillQuestions'.
-Point to 'FillQuestions', change to public, move into Questionnaire, but we can't due to 'CreateRockQuestion'.
+Point to 'FillQuestions', change to public, move into QuestionDeck, but we can't due to 'CreateRockQuestion'.
 See it? One more time, dependencies block the code.
-Point to 'CreateRockQuestion', change to public, move into Questionnaire.
-Point to 'FillQuestions', change to public, move into Questionnaire.
+Point to 'CreateRockQuestion', change to public, move into QuestionDeck.
+Point to 'FillQuestions', change to public, move into QuestionDeck.
 We aren't happy here due to 'CreateRockQuestion'.
 Just wait, annotate it and skip. Stay focused!
 
@@ -234,23 +230,23 @@ So first work on this. Analyze dependencies.
 Select 'places[currentPlayer]' and then Extract Variable to remove duplication.
 Prefer extract and move private methods instead of public one.
 Select the rest of the method, then Extract Method 'CategoryPlace'.
-Point to 'CategoryPlace', Move Method into Questionnaire.
+Point to 'CategoryPlace', Move Method into QuestionDeck.
 Get back in Game and inline 'places[currentPlayer]' variable.
 
 ## Attack AskQuestion
 Point to 'AskQuestion'.
-One way is to select, extract and move all body, since 'CurrentCategory' is in 'Questionnaire'.
+One way is to select, extract and move all body, since 'CurrentCategory' is in 'QuestionDeck'.
 But maintain the dependency between two methods.
 Prefer break dependency.
 Select 'CurrentCategory', Extract Variable to remove duplication.
 Select the rest of the method, then Extract Method 'AskQuestionCategory'.
-Point to 'AskQuestionCategory', Move Method into Questionnaire.
+Point to 'AskQuestionCategory', Move Method into QuestionDeck.
 We aren't happy here due to 'Console.WriteLine'.
 Just wait, annotate it and skip. Stay focused!
 
 ## Attack Game fields
-Find Usages of properties, result in only 'Questionnaire'.
-Inject ctor 'Game' into 'Questionnaire'.
+Find Usages of properties, result in only 'QuestionDeck'.
+Inject ctor 'Game' into 'QuestionDeck'.
 Set and use local collections fields.
 Remove Game parameter from public methods.
 Inline 'PopQuestions', 'ScienceQuestions', 'SportsQuestions' and 'RockQuestions'.
@@ -292,8 +288,8 @@ Better evidence the implicit relationship (from implicit to explicit).
 Extract array variable with conditionals values, change 'IF' in 'Contains'.
 Extract Field and move array initialization into Ctor.
 
-## Questions Born
-Now if we look closer to Questionnaire we can see that Data Clump is still there.
+## CategoryQuestions Born
+Now if we look closer to QuestionDeck we can see that Data Clump is still there.
 It is underlined by all little duplications.
 The problem here is that the logic is duplicated only to handle different data.
 How we proceed? We make a new Object that concentrate all the logic.
@@ -305,8 +301,8 @@ Replace one by one the other categories.
 Encapsulate Field to expose 'CategoryName' category.
 Aggregate all questions into a collection.
 
-## Write Questions Tests
-Add class QuestionsTests
+## Write CategoryQuestions Tests
+Add class CategoryQuestionsTests
 Add 'CheckPositionWithCorrectPlace' test. Add a 'PlaceOn' method.
 Add 'CheckPositionWithWrongPlace' test.
 Add 'ManyNextQuestions' test. Add a 'AddQuestion' method.
@@ -323,7 +319,7 @@ Golden Master test break, it's ok.
 QuestionnaireCharacterization tests break, it isn't ok.
 Revert and fix test.
 
-## Get Feedback from Questionnaire tests
+## Get Feedback from QuestionDeck tests
 Are tests good? No, they are Characterization tests.
 Tests are a great source of feedback because they use our code from a client point of view.
 In this case we see that:
@@ -333,7 +329,7 @@ In this case we see that:
 	- totally miss the boundary condition.
 Write better test, in parallel, in order to shape a better API.
 
-## Write Questionnaire Tests
+## Write QuestionDeck Tests
 Add class QuestionnaireTests.
 Rewrite 'CategoryForInBoardPlace'.
 Add a 'AddCategory' method.
@@ -344,7 +340,7 @@ Rename 'AskQuestion' to 'NextQuestionFor'.
 Rewrite 'AskSameCategoryQuestion'.
 Add 'AskQuestionForUnknownCategory'.
 
-## Remove Questionnaire Characterization Tests
+## Remove QuestionDeck Characterization Tests
 Now that we have good test we can remove Characterization tests.
 Update production code to use new API.
 
@@ -365,7 +361,7 @@ The second are application output to inform the developer.
 Notification rather than logging.
 Find first 'Console.WriteLine' and extract a method.
 Repeat for all output call.
-Extract 'Display' object.
+Extract 'ConsoleGameReport' object.
 Move all static methods.
 Make Display's methods non-static.
 Extract interface.
