@@ -76,23 +76,33 @@ The familiar way to implement the new requirement is to go over Game class and c
 In other words we add more duplications and more debit.
 But we can do better we can refactor the codebase!! :-)
 
-## Testing strategy
-Refactor whitout tests? Bad idea!
-We want write application end-to-end tests also knows as Characterization Tests.
-This Characterization tests freeze current behaviour.
-We can use application output to help us write simpler Characterization tests.
-The idea is very simple:
-  - grab and store output and use it for future verifications.
-  - if the output was changed the behaviour was changed too.
-The initial grabbed output is commonly knows as Golden Master.
-This isn't the only way to write this Characterization tests.
-It isn't 100% regression bug free, but can rich a good level with low effort.
-The quality of this kind of tests depends by the quality of input data.
-
 ## Setup Tests
+Refactor whitout tests? Bad idea!
 Install-Package NUnit/xUnit
 Write a "TryTestRunner" test and get Red Bar
 Fix "TryTestRunner" test and get Green Bar
+
+## Testing strategy
+We want write Characterization Tests that freeze current behaviour.
+We have many ways to accomplish that, like study the codebase and add many tests for each methods.
+But this is crazy, right? Why it is? Because it doesn't scale with large crappy codebases.
+In general there are two kinds of test: high level and low level.
+Low level tests give feedback on internal quality and they are precise on what failure and why.
+High level tests give feedback on external quality and they aren't precise, only fail or not.
+Draw GOOS graph to better explaint them.
+At the beginning we want write Characterization Tests as application end-to-end tests.
+
+## Begin End-to-end tests
+Every application has input and produce outputs.
+We can use output to help us write simpler Characterization tests.
+The idea is very simple:
+  - grab and store output for knows input and use for future verifications.
+  - grap current output and compare with stored one.
+  - if the output was changed the behaviour was changed too.
+The stored output is commonly knows as Golden Master.
+This isn't the only way to write this Characterization tests.
+It isn't 100% regression bug free, but can rich a good level with low effort.
+The quality of this kind of tests depends by the quality of input data.
 
 ## Can we Grab the output?
 Explore application as black-box.
