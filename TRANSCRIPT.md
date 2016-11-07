@@ -152,21 +152,21 @@ Read Golden Master content and put it into 'expected' variable.
 Read last output content and put into 'actual' variable.
 Assert.Equal(expected, actual);
 Try change something, the test fail.
-But, remember? It isn't 100% regression bug free.
+But remember, it isn't 100% regression bug free.
 Clean up test code.
 
 # EPISODE 2
 
 ## Bad Code Smell
-We do when have to add a feature to a program, and the code is not structured in a convenient way.
+We do refactoring when have to add a feature to a program, and the code is not structured in a convenient way.
 The set of inconvenient way is called bad code smell.
 The Martin Fowler's Refactoring Book list 22 Code Smells, of various scope from methods to classes.
 There are other books that define different smells or same smells with different names.
 With every smell is associated a list of possible refactoring.
-Except some special refactoring, we can divide it in three basic movements: extract, inline and move.
-This basic refactoring are at the heart of bigger refactoring, we sum little behaviour to get bigger behaviour.
+The correct refactoring depends from what is our final goal.
+We can divide refactoring in three basic movements: extract, inline and move.
+This basic movements are at the heart of bigger refactoring (we sum little behaviour to get bigger behaviour).
 Most of the time before get the final design we pass through various intermediate steps that increase the level of dirtiness of the code.
-Sometimes which refactoring is better in which case, is difficult to say, it depends, so we use heuristics or prototypes.
 Another aspect is that smells and refactoring was born into OOP circle.
 Nothing stop to find smells and apply refactoring related to different programming paradigms like FP or other NFR aspect like performance.
 
@@ -177,7 +177,7 @@ Large Class: when a class is try to do too much typically contains too many resp
 Duplicated Code: the simplest form is when you have the exact same expression in two place.
 Switch Statements: is a procedural way to express type-based behaviour.
 Conditional Complexity: idem, is a procedural way to express context-based behaviour.
-Primitive Obsession: all programming environments offer only primitive data type like int and string.
+Primitive Obsession: we use too much primitive data type offered by runtime like int and string.
 Data Clumps: often you'll see the same set of data items together in many places.
 Feature Envy: when a method makes too many calls to other classes to obtain data.
 Divergent Change: occurs when one class is commonly changed in different ways for different reasons.
@@ -190,25 +190,25 @@ Divergent Change: Game class may change for penalty rule, board, questionnaire, 
 Primitive Obsession: every Game's field is of primitive types.
 Long Method: roll(int roll), wasCorrectlyAnswered().
 Duplicated Code: places[currentPlayer], players[currentPlayer], places[currentPlayer] = places[currentPlayer] roll, if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12, if (currentPlayer == players.Count) currentPlayer = 0.
-Shotgun Surgery: Every time we handle a new question category we need to modify Game's ctor and askQuestion().
+Shotgun Surgery: Every time we handle a new question category we need to modify Game's ctor, askQuestion() and currentCategory().
 Data Clump: all question related fields are hang around together, all the player fields.
 Feature Envy: GameRunner call many Game methods to decide if there is a winner. Console would be same notification object.
 Switch Statement: askQuestion(), currentCategory().
 Conditional Complexity: roll(int roll), wasCorrectlyAnswered().
 
-## Remember the new requirement
-Handle History category.
+## Smells that impact the new requirement
+We need to handle History category.
 We have many smells related to questions logic.
-The primary is Shotgun Surgery, then Data Clumps and unmissable Primitive Obsession.
-But directly work inside Game class is difficult and even worst risky.
-We can do better, we can first solve Data Clump and extract questions logic.
-Then we can works with the new little surface.
+The primary is Shotgun Surgery, then Data Clumps and unmissables Primitive Obsession and Duplication.
+But directly work inside Game class is complex and even worst risky.
+We can do better, we can isolate affected parts moving them into another place.
+Then we can works in the new place with little surface and complexity.
 At beginning we want favour refactoring that reduce the scope in order to hide complexity.
-Add TODO file with Data Clump and Shotgun Surgery categories.
 Focus is really important during refactoring in order to don't introduce regression.
+Begin adding a TODO file with the result of ALT+F7 on one random questions field.
 
 ## QuestionDeck Born
-Target move questions related code, as is, into a new class.
+Target, move questions related code, as is, into a new class.
 Remember:
 	1) Commit frequently.
 	2) Run tests frequently.
@@ -217,11 +217,13 @@ Add empty class QuestionDeck.
 Add readonly field in Game.
 
 ## Try Attack FillQuestions
-Find Usages on all the questions collection show that they are all used in three place.
-Take the first in Game's ctor.
+First interessed part is in Game's ctor.
 The logic is difficult to move around for two reason:
 	1) is in the ctor
 	2) access to Game's private field
+Ok we can easily extract the logic but what about fields.
+In order to move around methods that use this filds, we need to open them to public access.
+But open field is risky, let introduce a bottleneck ahead.
 
 ## Encapsulate Fields
 We need to understand how Game change questions state.
