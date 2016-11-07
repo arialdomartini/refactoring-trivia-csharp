@@ -66,10 +66,14 @@ The code isn't a total crap like our production codebases, but is difficult enou
 And like production codebases there aren't tests.
 
 ## New Requirement
-The business ask we to handle a brand new History category.
+The business ask we to handle a brand new category: History.
+At this point we have only one friend...Find all.
+Try Find all "category"...many magic strings.
+Try Find all "pop"...many fields.
+ALT+F7 on popQuestions.
 If we look closer to other questions categories we see that there are many duplicated lines of code.
 The familiar way to implement the new requirement is to go over Game class and change it in many places.
-In other words we add more duplications and more debit
+In other words we add more duplications and more debit.
 But we can do better we can refactor the codebase!! :-)
 
 ## Testing strategy
