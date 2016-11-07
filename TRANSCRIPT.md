@@ -123,7 +123,7 @@ Run tests many times, each one to different files.
 Are the results equals? Compare with diff tool.
 They are different, outout isn.t deterministic.
 Why? Possible causes? Input? DateTime? Db? Looking for it.
-Find All 'random'.
+Find All "random".
 
 ## Isolate Randomness
 Open ScriptCS or C# Interactive.
@@ -148,8 +148,8 @@ Commit gorlden-master.txt file.
 
 ## Write Characterization Test
 Produce new output file of same number of runs.
-Read Golden Master content and put it into 'expected' variable.
-Read last output content and put into 'actual' variable.
+Read Golden Master content and put it into "expected" variable.
+Read last output content and put into "actual" variable.
 Assert.Equal(expected, actual);
 Try change something, the test fail.
 But remember, it isn't 100% regression bug free.
@@ -262,27 +262,27 @@ Get back in Game and inline "places[currentPlayer]" variable.
 Remove this item from TODO list.
 
 ## Attack AskQuestion
-Point to 'AskQuestion'.
+Point to "AskQuestion".
 This method already exists, so before move around we need two check.
 First check it is visibility, it is public or private? Private, ok movable for now.
 Second check dependencies, more than one method? Yes, revert movable.
 Move this method is risky, let introduce a bottleneck behind of them.
 More, we dependes by another not moved method, prefer break dependency.
 Same refactoring as before but with inverted steps.
-Select all method's body, then Extract Method 'AskQuestionCategory'.
-Select 'CurrentCategory', Extract Parameter to remove duplication.
-Point to 'AskQuestionCategory', F6 Move Method into QuestionDeck.
-We aren't happy here due to 'Console.WriteLine'.
+Select all method's body, then Extract Method "AskQuestionCategory".
+Select "CurrentCategory", Extract Parameter to remove duplication.
+Point to "AskQuestionCategory", F6 Move Method into QuestionDeck.
+We aren't happy here due to "Console.WriteLine".
 Just wait, annotate it and skip. Stay focused!
 Remove this item from TODO list.
 
 ## Attack Game fields
-Find Usages of properties, result in only 'QuestionDeck'.
+Find Usages of properties, result in only "QuestionDeck".
 At the end we need to move the field initialization from Game to QuestionDeck.
 Theretically we can inline all the properties, but in practice we can't.
 And even if we will, we wont because Game is used in two places, not one.
 Inline properties is risky, let introduce a bottleneck.
-Inject ctor 'Game' into 'QuestionDeck'.
+Inject ctor "Game" into "QuestionDeck".
 Set and use local collections fields.
 Remove Game parameter from public methods.
 Better but we still can't inline due to invocation chain.
@@ -293,72 +293,80 @@ Inline field definition into property.
 QuestionDeck -> PopQuestions -> new LinkedList<String>
 Inline property  into caller.
 QuestionDeck -> new LinkedList<String>
-Inline remaining 'ScienceQuestions', 'SportsQuestions' and 'RockQuestions'.
+Inline remaining "ScienceQuestions", "SportsQuestions" and "RockQuestions".
 
 # EPISODE 3
 
 ## Put CurrentCategory Under Characterization Tests
-Add class QuestionnaireCharacterizationTests.
-Add 'CategoryForCorrectPlace' data-driven test.
-Add 'CategoryForOutOfBoardPlace' test.
-
-## Put AskQuestion Under Characterization Tests
-Add 'AskDifferentCategoryQuestion' test.
-We can test without a visible output.
-Add a return value equal to print.
-Complete 'AskDifferentCategoryQuestion' test.
-Add 'AskSameCategoryQuestion' test.
-Add 'AskMixCategoryQuestion' test.
-
-## Clean FillQuestions
-Point to "FillQuestions".
-Remove useless parenthesis.
-Inline 'CreateQuestion'.
-Extract 'BuildQuestion' method.
-
-## Clean AskQuestionCategory
-Point to 'AskQuestionCategory'.
-Extract Variable to remove duplication, call 'Console.WriteLine' only once.
-Change return type from 'Void' to 'String'.
-Move 'Console.WriteLine' into 'Game'.
-
-## Clean CategoryPlace
-Point to 'CategoryPlace'.
-Use '||' (or) to collapse conditionals.
+Add class QuestionDeckTests.
+Add "CategoryForPlace" data-driven test.
 What for the last category (Rock)?
 It seems that it hasn't a relationship with the place.
 In reality it has, only that is implicit.
 Better evidence the implicit relationship (from implicit to explicit).
-Extract array variable with conditionals values, change 'IF' in 'Contains'.
+Add "CategoryForOutOfBoardPlace" test.
+
+## Put AskQuestion Under Characterization Tests
+Add "AskCategoryFirstQuestion" test.
+We can test without a visible output.
+Change return type from "Void" to "String".
+Add a return value equal to printed one.
+Complete "AskCategoryFirstQuestion" test.
+Add "AskManyQuestionsForSameCategory" test.
+Add "AskQuestionForDifferentCategory" test.
+Add "AskMixCategoryQuestion" test.
+
+## Clean FillQuestions
+Point to "FillQuestions".
+Remove useless parenthesis.
+Point to "createRockQuestion" not inline because we can reuse it.
+Let Extract Parameter category name and then Rename into "CreateQuestion".
+This is the power of waiting the last responsible moment to take decisions.
+
+## Clean AskQuestionCategory
+Point to "AskQuestionCategory".
+Extract Variable from return.
+Move variable outer scope to remove duplications.
+Move "Console.WriteLine" outer scope to remove duplications.
+Move "Console.WriteLine" into "Game".
+
+## Clean CategoryPlace
+Point to "CategoryPlace".
+Use "||" (or) to collapse conditionals.
+Extract array variable with conditionals values, change "IF" in "Contains".
 Extract Field and move array initialization into Ctor.
+Wow!! More Data Clumps and in a different form.
+Another example of the power of waiting the last responsible moment to take decisions.
+Port remaining "ScienceQuestions", "SportsQuestions" and "RockQuestions".
 
 ## CategoryQuestions Born
 Now if we look closer to QuestionDeck we can see that Data Clump is still there.
 It is underlined by all little duplications.
 The problem here is that the logic is duplicated only to handle different data.
-How we proceed? We make a new Object that concentrate all the logic.
-In order to refactor safely we use Parallel Design.
-Add class 'Question' and use Pop Category to shape the external API.
+How we proceed? We make a new Object that concentrate only the logic and ask for data.
+This time we use another technique called Parallel Design.
+Add class "CategoryQuestions" and use Pop Category to shape the external API.
+Don't leave the NotImplementedException, the code must run.
+Replace one by one the other categories.
+Encapsulate Field to expose "CategoryName" category.
 What we have done is follow one of the Pragmatic Programmers tip:
 	Put Abstraction in Code and Details in Data.
-Replace one by one the other categories.
-Encapsulate Field to expose 'CategoryName' category.
 Aggregate all questions into a collection.
 
 ## Write CategoryQuestions Tests
 Add class CategoryQuestionsTests
-Add 'CheckPositionWithCorrectPlace' test. Add a 'PlaceOn' method.
-Add 'CheckPositionWithWrongPlace' test.
-Add 'ManyNextQuestions' test. Add a 'AddQuestion' method.
-Add 'NextQuestionWhenTerminated' test. Chose an Exception.
-Change method names in 'IsOnPlace' and 'NextQuestion'.
+Add "CheckPositionWithCorrectPlace" test. Add a "PlaceOn" method.
+Add "CheckPositionWithWrongPlace" test.
+Add "ManyNextQuestions" test. Add a "AddQuestion" method.
+Add "NextQuestionWhenTerminated" test. Chose an Exception.
+Change method names in "IsOnPlace" and "NextQuestion".
 Use simple collection like List<> or Queue<>.
 
 ## Retry Add New Requirement
 Now handle History Category is one line change.
 But the board was full, so we need to understand where place this new questions, so talk with business.
 The responses could be many, replace a old one with new, change distribution algorithm, doesn't add History anymore.
-In this case replace 'Science' with 'History'.
+In this case replace "Science" with "History".
 Golden Master test break, it's ok.
 QuestionnaireCharacterization tests break, it isn't ok.
 Revert and fix test.
@@ -375,21 +383,21 @@ Write better test, in parallel, in order to shape a better API.
 
 ## Write QuestionDeck Tests
 Add class QuestionnaireTests.
-Rewrite 'CategoryForInBoardPlace'.
-Add a 'AddCategory' method.
-Rename 'CategoryPlace' to 'CategoryOn'.
-Rewrite 'CategoryForOutOfBoardPlace'.
-Rewrite 'AskDifferentCategoryQuestion'.
-Rename 'AskQuestion' to 'NextQuestionFor'.
-Rewrite 'AskSameCategoryQuestion'.
-Add 'AskQuestionForUnknownCategory'.
+Rewrite "CategoryForInBoardPlace".
+Add a "AddCategory" method.
+Rename "CategoryPlace" to "CategoryOn".
+Rewrite "CategoryForOutOfBoardPlace".
+Rewrite "AskDifferentCategoryQuestion".
+Rename "AskQuestion" to "NextQuestionFor".
+Rewrite "AskSameCategoryQuestion".
+Add "AskQuestionForUnknownCategory".
 
 ## Remove QuestionDeck Characterization Tests
 Now that we have good test we can remove Characterization tests.
 Update production code to use new API.
 
 ## Now Add New Requirement
-Replace 'Science' with 'History'.
+Replace "Science" with "History".
 Golden Master test break, it's ok.
 
 ## Approve New Golden Master
@@ -403,16 +411,16 @@ There are two big category for logging, support and diagnostic.
 The first are application output to inform the user.
 The second are application output to inform the developer.
 Notification rather than logging.
-Find first 'Console.WriteLine' and extract a method.
+Find first "Console.WriteLine" and extract a method.
 Repeat for all output call.
-Extract 'ConsoleGameReport' object.
+Extract "ConsoleGameReport" object.
 Move all static methods.
 Make Display's methods non-static.
 Extract interface.
 Extract dependency.
-Remove 'Console.WriteLine' duplication.
+Remove "Console.WriteLine" duplication.
 Extract Field writer.
-Inline 'ConoleWriteLine'.
+Inline "ConoleWriteLine".
 Update Golden Master tests
 But we did refactoring without a feature?
 There are non-functional requirements guided by non-functional feature.
