@@ -48,6 +48,8 @@ We need to cover the application code with automatic tests
 With legacy application it's particular kind of tests.
 We want write application tests also knows as Characterization Tests.
 
+TODO: da rivedere il modo di distribuzione della codebase, 
+non posso darla come zip se voglio fornire le branches come recovery points
 ## Inherit codebase
 Get Trivia
 	https://drive.google.com/drive/folders/0B72Hr4IhXoCkNWlqQVVQNmN0ZkE
