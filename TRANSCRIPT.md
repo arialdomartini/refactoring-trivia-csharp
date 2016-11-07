@@ -31,16 +31,13 @@ We need to cover the application code with automatic tests
 With legacy application it's particular kind of tests.
 We want write application tests also knows as Characterization Tests.
 
-TODO: add or not?
-## Quick FizzBuzz Demo
-Get FizzBuzz
-	https://drive.google.com/drive/folders/0B72Hr4IhXoCkNWlqQVVQNmN0ZkE
+## Quick FizzBuzz Demo (only you)
 Open, build and run solution.
 Run tests.
 Add divisible by 7 print "Yo!".
 Easy way, ifs expolosion.
 Refactoring way make code reusable.
-Now easy and clean way.
+Now easy and clean way, we can call simple way.
 
 ## Inherit codebase
 Get Trivia
