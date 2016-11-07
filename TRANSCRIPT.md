@@ -1,7 +1,3 @@
-CHECK:
-https://blog.twitter.com/2015/diffy-testing-services-without-writing-tests
-https://zachholman.com/talk/move-fast-break-nothing/
-
 # EPISODE 1
 
 ## Introduction
