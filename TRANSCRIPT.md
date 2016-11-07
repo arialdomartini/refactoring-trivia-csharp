@@ -218,32 +218,29 @@ Add readonly field in Game.
 
 ## Try Attack FillQuestions
 First interessed part is in Game's ctor.
-The logic is difficult to move around for two reason:
-	1) is in the ctor
-	2) access to Game's private field
-Ok we can easily extract the logic but what about fields.
+The logic is impossible to move around because is in the ctor.
+Select all code and then Extract Method "FillQuestions".
+Go on "FillQuestions" and hit F6 move method, but R# show many warnings.
+Don't do refactoring like that, be more safe, do refactoring with zero/one warning.
 In order to move around methods that use this filds, we need to open them to public access.
-But open field is risky, let introduce a bottleneck ahead.
+But open field is risky, let introduce a bottleneck in front of them.
 
 ## Encapsulate Fields
+The .NET way to encapsulate a field is a property.
+But with getters and setters?
 We need to understand how Game change questions state.
-Find Usages on all the questions collection show that they are all used in three place.
-Only 'AskQuestion' introduce side-effects, but nobody change fields.
-Improve safety mark field as readonly.
-Encapsulate fields.
+The fastest and secure way to understand that is to mark field as readonly.
+Then Encapsulate fields and expose only getters.
 Ensure that all Game's code never directly access to fields.
-Create a bottleneck, not another Shotgun Surgery.
+We have created a bottleneck, se the future refactoring inpact will always be one place.
 
 ## Attack FillQuestions
-The logic is difficult to move around for two reason:
-	1) is in the ctor
-Fix 1, select all code and then Extract Method 'FillQuestions'.
-Point to 'FillQuestions', change to public, move into QuestionDeck, but we can't due to 'CreateRockQuestion'.
+Come back to "FillQuestions", change to public, move method, but R# show one more warning, "createRockQuestion".
 See it? One more time, dependencies block the code.
-Point to 'CreateRockQuestion', change to public, move into QuestionDeck.
-Point to 'FillQuestions', change to public, move into QuestionDeck.
-We aren't happy here due to 'CreateRockQuestion'.
-Just wait, annotate it and skip. Stay focused!
+Point to "createRockQuestion", change to public, move into QuestionDeck.
+But wait, the method is stupid, we can inline it...don't do that!! Stay focused, add to TODO list.
+Point to "FillQuestions", change to public, move into QuestionDeck.
+Mark back "createRockQuestion" as private.
 
 ## Attack CurrentCategory
 Point to next Find Usages, aka AskQuestion.
@@ -292,7 +289,7 @@ Add 'AskSameCategoryQuestion' test.
 Add 'AskMixCategoryQuestion' test.
 
 ## Clean FillQuestions
-Point to 'FillQuestions'.
+Point to "FillQuestions".
 Remove useless parenthesis.
 Inline 'CreateQuestion'.
 Extract 'BuildQuestion' method.
