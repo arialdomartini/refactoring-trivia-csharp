@@ -21,26 +21,32 @@ Describe "Refactoring Legacy Code" initiative
   - exploratory tests
 
 ## Introduction to Refactoring
-More important of what is when.
-When refactor?
+More important of what is when. When refactor?
 When you have to add a feature to a program, and the code is not structured in a convenient way to add that feature.
 First refactor the program to make it easy to add the feature, then add the feature.
+Show two cost/change graphs (anonymous), ideal and legacy.
 Refactoring must be applied in order to reduce maintanability costs (aka not increase the crap)
 What is refactoring?
 Refactoring is the process of restructuring code without changing its external behavior.
 Refactoring improves only nonfunctional (quality, performance, etc) attributes of the software.
-How can we know that we didn't change anything?
-We need to cover the application code with automatic tests
-With legacy application it's particular kind of tests.
-We want write application tests also knows as Characterization Tests.
 
 ## Quick FizzBuzz Demo (only you)
 Open, build and run solution.
 Run tests.
+Who knows the kata? Explain it!
 Add divisible by 7 print "Yo!".
 Easy way, ifs expolosion.
+Map this behaviour on the anonymous graphs.
 Refactoring way make code reusable.
 Now easy and clean way, we can call simple way.
+Verify with the 7 implementation.
+
+## Refactoring and Testing relation
+After a deep refactoring.
+How can we know that we didn't change anything?
+We need to cover the application code with automatic tests
+With legacy application it's particular kind of tests.
+We want write application tests also knows as Characterization Tests.
 
 ## Inherit codebase
 Get Trivia
