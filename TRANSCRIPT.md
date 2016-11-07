@@ -242,18 +242,22 @@ But wait, the method is stupid, we can inline it...don't do that!! Stay focused,
 Point to "FillQuestions", change to public, move into QuestionDeck.
 Mark back "createRockQuestion" as private.
 
-## Attack CurrentCategory
-Point to next Find Usages, aka AskQuestion.
+## Try Attack AskQuestion
+Look at TODO list and point to "askQuestion".
 Analyze dependencies, one way to do is copy/paste method from source to destination and see the compilation error.
 AskQuestion dependes from CurrentCategory so move this first.
-Point to CurrentCategory method.
-Is this method related to questions logic? Yes, it is or at least it seems.
-So first work on this. Analyze dependencies.
-Select 'places[currentPlayer]' and then Extract Variable to remove duplication.
-Prefer extract and move private methods instead of public one.
-Select the rest of the method, then Extract Method 'CategoryPlace'.
-Point to 'CategoryPlace', Move Method into QuestionDeck.
-Get back in Game and inline 'places[currentPlayer]' variable.
+
+## Attack CurrentCategory
+Point to "currentCategory" method.
+This method already exists, so before move around we need two check.
+First check it is visibility, it is public or private? Private, ok movable for now.
+Second check dependencies, more than one method? Yes, revert movable.
+Move this method is risky, let introduce a bottleneck behind of them.
+The new method must be movable by design, so not introduce dependencies.
+Select "places[currentPlayer]" and then Extract Variable to remove duplication.
+Select the rest of the method, then Extract Method "CategoryPlace".
+Point to "CategoryPlace", F6 move method into QuestionDeck.
+Get back in Game and inline "places[currentPlayer]" variable.
 
 ## Attack AskQuestion
 Point to 'AskQuestion'.
