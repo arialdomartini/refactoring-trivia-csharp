@@ -241,6 +241,7 @@ Point to "createRockQuestion", change to public, move into QuestionDeck.
 But wait, the method is stupid, we can inline it...don't do that!! Stay focused, add to TODO list.
 Point to "FillQuestions", change to public, move into QuestionDeck.
 Mark back "createRockQuestion" as private.
+Remove this item from TODO list.
 
 ## Try Attack AskQuestion
 Look at TODO list and point to "askQuestion".
@@ -258,24 +259,41 @@ Select "places[currentPlayer]" and then Extract Variable to remove duplication.
 Select the rest of the method, then Extract Method "CategoryPlace".
 Point to "CategoryPlace", F6 move method into QuestionDeck.
 Get back in Game and inline "places[currentPlayer]" variable.
+Remove this item from TODO list.
 
 ## Attack AskQuestion
 Point to 'AskQuestion'.
-One way is to select, extract and move all body, since 'CurrentCategory' is in 'QuestionDeck'.
-But maintain the dependency between two methods.
-Prefer break dependency.
-Select 'CurrentCategory', Extract Variable to remove duplication.
-Select the rest of the method, then Extract Method 'AskQuestionCategory'.
-Point to 'AskQuestionCategory', Move Method into QuestionDeck.
+This method already exists, so before move around we need two check.
+First check it is visibility, it is public or private? Private, ok movable for now.
+Second check dependencies, more than one method? Yes, revert movable.
+Move this method is risky, let introduce a bottleneck behind of them.
+More, we dependes by another not moved method, prefer break dependency.
+Same refactoring as before but with inverted steps.
+Select all method's body, then Extract Method 'AskQuestionCategory'.
+Select 'CurrentCategory', Extract Parameter to remove duplication.
+Point to 'AskQuestionCategory', F6 Move Method into QuestionDeck.
 We aren't happy here due to 'Console.WriteLine'.
 Just wait, annotate it and skip. Stay focused!
+Remove this item from TODO list.
 
 ## Attack Game fields
 Find Usages of properties, result in only 'QuestionDeck'.
+At the end we need to move the field initialization from Game to QuestionDeck.
+Theretically we can inline all the properties, but in practice we can't.
+And even if we will, we wont because Game is used in two places, not one.
+Inline properties is risky, let introduce a bottleneck.
 Inject ctor 'Game' into 'QuestionDeck'.
 Set and use local collections fields.
 Remove Game parameter from public methods.
-Inline 'PopQuestions', 'ScienceQuestions', 'SportsQuestions' and 'RockQuestions'.
+Better but we still can't inline due to invocation chain.
+QuestionDeck -> PopQuestions -> private popQuestions -> new LinkedList<String>
+We can change field visibility and then inline property but we break the chain in the middle.
+Change strategy and start from the end and go backward.
+Inline field definition into property.
+QuestionDeck -> PopQuestions -> new LinkedList<String>
+Inline property  into caller.
+QuestionDeck -> new LinkedList<String>
+Inline remaining 'ScienceQuestions', 'SportsQuestions' and 'RockQuestions'.
 
 # EPISODE 3
 
