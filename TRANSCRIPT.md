@@ -108,45 +108,42 @@ The quality of this kind of tests depends by the quality of input data.
 Explore application as black-box.
 Add a SpikeTests class in same project.
 Write a test that execute GameRunner.Main(null).
-Exception? No/ Great!
+Exception? No? Great!
 Where output came from? Logger? Trace? Console? Looking for it.
-Find All 'console.write' in order to verify if app directly write to Console.
+Find All "console.write" in order to verify if app directly write to Console.
 I need to grab output. How I can? Possible solutions:
 	- execute app and redirect output via shell script
-	- execute app via Process class and redirect output
 	- replace all Console.WriteLine with a call to a custom logger
 	- set Console.Out to a own file/memory stream
 Change test Console.SetOut(new StringWriter()) and Assert.Equal("", output);
 
 ## Is output deterministic?
 Redirect output from memory to file.
-Run tests many times, each one on different file.
+Run tests many times, each one to different files.
 Are the results equals? Compare with diff tool.
-Show that tests aren't deterministic.
-Why? Possible causes? Input? DateTime? Db?
+They are different, outout isn.t deterministic.
+Why? Possible causes? Input? DateTime? Db? Looking for it.
 Find All 'random'.
 
 ## Isolate Randomness
-Open ScriptCS
+Open ScriptCS or C# Interactive.
 Show that a Random with same seed produce every time same sequence of values.
 How can we get rid of Random? Possible solutions:
 	- input args (high impact, error prone due to if (args == null))
-	- slice (medium impact, all done with refactoring move)
-	- peel (low impact)
-Implement peel, push up random variable.
-Extract Run method.
-Run game tests many times.
-Are the results equals? Compare with visual tool.
+	- slice (medium impact, from static to instance, all done with refactoring move)
+	- peel (low impact, only one refactoring move)
+Temporally set Random to fixed seed in production code.
+Implement all three in branches to feel the impact.
+Keep peel, so merge in master.
+Remove fixed seed in production code.
 
 ## Finally produce Golden Master
-Run game test with seed equal to zero.
-Run with Code Coverage Tool.
-Run same test with seed from zero to two.
-Run with Code Coverage Tool.
+Run test with Code Coverage and seed equal to zero.
+Run test with Code Coverage and seed equal to two.
 Run same test linear function to generate spread seed.
-Run with Code Coverage Tool.
-Copy output.txt into ..\..\golden-master.txt.
-To do always with manual intervention.
+Run test with Code Coverage Tool.
+Manually copy output.txt into ..\..\golden-master.txt.
+Always do with manual intervention.
 Commit gorlden-master.txt file.
 
 ## Write Characterization Test
@@ -156,7 +153,6 @@ Read last output content and put into 'actual' variable.
 Assert.Equal(expected, actual);
 Try change something, the test fail.
 But, remember? It isn't 100% regression bug free.
-Try change something else, and test still pass.
 Clean up test code.
 
 # EPISODE 2
