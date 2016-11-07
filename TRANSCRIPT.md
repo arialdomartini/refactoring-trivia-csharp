@@ -56,9 +56,14 @@ Execute git init
 Execute git add . -A
 Execute git commit -m "Inherited mess :-)"
 
-## New Requirement
+## The Trivia Game
 Trivia is a trivial pursuite game simulation.
+Who knows? Explain it!
 The game was composed by board, dice, players, questions of various categories.
+The code isn't a total crap like our production codebases, but is difficult enough.
+And like production codebases there aren't tests.
+
+## New Requirement
 The business ask we to handle a brand new History category.
 If we look closer to other questions categories we see that there are many duplicated lines of code.
 The familiar way to implement the new requirement is to go over Game class and change it in many places.
