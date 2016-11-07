@@ -4,14 +4,21 @@
 People presentation
 Describe you
 Describe "Refactoring Legacy Code" initiative
-  - various kind of tests
-  - refactoring
-  - raise your confidence
+  - fast feedback loop
   - tiny steps
   - 2 minutes to commit
-  - fast feedback loop
+  - raise your confidence
+  - brach for experiment
+  - master IDE short-cuts
+  - common bad code smells
+  - looking for smells
+  - refactoring (what/when)
+  - refactoring (moves)
   - break dependencies
-  - isolating moving parts
+  - isolate to reduce scope
+  - golden master tests
+  - characterization tests
+  - exploratory tests
 
 ## Introduction to Refactoring
 More important of what is when.
