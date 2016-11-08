@@ -183,6 +183,10 @@ Feature Envy: when a method makes too many calls to other classes to obtain data
 Divergent Change: occurs when one class is commonly changed in different ways for different reasons.
 Shotgun Surgery: every time you make the same kind of change, you have to make a lot of little changes to a lot of different classes.
 Refused Bequest: inherit too much useless fields and methods due to wrong class hierarchy.
+Contegorized as:
+STRUCTURAL: Long Method, Large Class, Long Parameter List
+MISSING OO: Primitive Obsession, Switch Statements, Duplicate Code, Conditional Complexity
+RESPONSIBILITY DISTRIBUTION: Data Clumps, Refused Bequest, Divergent Change, Shotgun Surgery, Feature Envy
 
 ## Looking for smells
 Large Class: Game class
@@ -432,3 +436,6 @@ TODO: talk about quick & dirty and deep practice
 
 ## The End
 Thanks a lot to had attended to this course!!!
+
+
+
