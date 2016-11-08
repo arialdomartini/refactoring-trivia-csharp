@@ -147,20 +147,20 @@ namespace UglyTrivia
 
         private String currentCategory()
         {
-            return CurrentCategoryPlace();
+            return CurrentCategoryPlace(places[currentPlayer]);
         }
 
-        String CurrentCategoryPlace()
+        String CurrentCategoryPlace(Int32 currentPlace)
         {
-            if (places[currentPlayer] == 0) return "Pop";
-            if (places[currentPlayer] == 4) return "Pop";
-            if (places[currentPlayer] == 8) return "Pop";
-            if (places[currentPlayer] == 1) return "Science";
-            if (places[currentPlayer] == 5) return "Science";
-            if (places[currentPlayer] == 9) return "Science";
-            if (places[currentPlayer] == 2) return "Sports";
-            if (places[currentPlayer] == 6) return "Sports";
-            if (places[currentPlayer] == 10) return "Sports";
+            if (currentPlace == 0) return "Pop";
+            if (currentPlace == 4) return "Pop";
+            if (currentPlace == 8) return "Pop";
+            if (currentPlace == 1) return "Science";
+            if (currentPlace == 5) return "Science";
+            if (currentPlace == 9) return "Science";
+            if (currentPlace == 2) return "Sports";
+            if (currentPlace == 6) return "Sports";
+            if (currentPlace == 10) return "Sports";
             return "Rock";
         }
 
