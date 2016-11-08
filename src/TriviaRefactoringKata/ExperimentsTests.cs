@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System;
+using System.IO;
+using Xunit;
 
 namespace Trivia
 {
@@ -7,7 +9,10 @@ namespace Trivia
         [Fact]
         public void Blah()
         {
-           GameRunner.Main(null); 
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+            GameRunner.Main(null);
+            Assert.Equal("", writer.ToString());
         }
     }
 }
