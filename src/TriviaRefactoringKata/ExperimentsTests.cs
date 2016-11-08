@@ -14,7 +14,7 @@ namespace Trivia
                 Console.SetOut(writer);
                 for (int i = 0; i < 1; i++)
                 {
-                    var seed = i;
+                    var seed = 34728 + 17 * i;
                     GameRunner.Run(new Random(seed));
                 }
             }
