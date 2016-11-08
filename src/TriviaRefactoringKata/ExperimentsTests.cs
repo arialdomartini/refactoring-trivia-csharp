@@ -9,12 +9,17 @@ namespace Trivia
         [Fact]
         public void Blah()
         {
+            RunOneThousandGames();
+        }
+
+        static void RunOneThousandGames()
+        {
             using (var writer = File.CreateText("output1.txt"))
             {
                 Console.SetOut(writer);
-                for (int i = 0; i < 1; i++)
+                for (var i = 0; i < 1000; i++)
                 {
-                    var seed = 34728 + 17 * i;
+                    var seed = 34728 + 17*i;
                     GameRunner.Run(new Random(seed));
                 }
             }
