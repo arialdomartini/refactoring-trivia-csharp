@@ -38,14 +38,29 @@ namespace UglyTrivia
             get { return popQuestions; }
         }
 
+        public LinkedList<String> ScienceQuestions
+        {
+            get { return scienceQuestions; }
+        }
+
+        public LinkedList<String> SportsQuestions
+        {
+            get { return sportsQuestions; }
+        }
+
+        public LinkedList<String> RockQuestions
+        {
+            get { return rockQuestions; }
+        }
+
         void FillQuestions()
         {
             for (int i = 0; i < 50; i++)
             {
                 PopQuestions.AddLast("Pop Question " + i);
-                scienceQuestions.AddLast(("Science Question " + i));
-                sportsQuestions.AddLast(("Sports Question " + i));
-                rockQuestions.AddLast(createRockQuestion(i));
+                ScienceQuestions.AddLast(("Science Question " + i));
+                SportsQuestions.AddLast(("Sports Question " + i));
+                RockQuestions.AddLast(createRockQuestion(i));
             }
         }
 
@@ -130,18 +145,18 @@ namespace UglyTrivia
             }
             if (currentCategory() == "Science")
             {
-                Console.WriteLine(scienceQuestions.First());
-                scienceQuestions.RemoveFirst();
+                Console.WriteLine(ScienceQuestions.First());
+                ScienceQuestions.RemoveFirst();
             }
             if (currentCategory() == "Sports")
             {
-                Console.WriteLine(sportsQuestions.First());
-                sportsQuestions.RemoveFirst();
+                Console.WriteLine(SportsQuestions.First());
+                SportsQuestions.RemoveFirst();
             }
             if (currentCategory() == "Rock")
             {
-                Console.WriteLine(rockQuestions.First());
-                rockQuestions.RemoveFirst();
+                Console.WriteLine(RockQuestions.First());
+                RockQuestions.RemoveFirst();
             }
         }
 
