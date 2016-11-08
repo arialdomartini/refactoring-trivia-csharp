@@ -147,21 +147,7 @@ namespace UglyTrivia
 
         private String currentCategory()
         {
-            return CurrentCategoryPlace(places[currentPlayer]);
-        }
-
-        String CurrentCategoryPlace(Int32 currentPlace)
-        {
-            if (currentPlace == 0) return "Pop";
-            if (currentPlace == 4) return "Pop";
-            if (currentPlace == 8) return "Pop";
-            if (currentPlace == 1) return "Science";
-            if (currentPlace == 5) return "Science";
-            if (currentPlace == 9) return "Science";
-            if (currentPlace == 2) return "Sports";
-            if (currentPlace == 6) return "Sports";
-            if (currentPlace == 10) return "Sports";
-            return "Rock";
+            return questionDeck.CurrentCategoryPlace(places[currentPlayer]);
         }
 
         public bool wasCorrectlyAnswered()
