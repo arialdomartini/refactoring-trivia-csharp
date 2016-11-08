@@ -18,7 +18,7 @@ namespace Trivia
             return "Rock Question " + index;
         }
 
-        public void FillQuestions(Game game_)
+        public void FillQuestions()
         {
             for (int i = 0; i < 50; i++)
             {
@@ -43,7 +43,7 @@ namespace Trivia
             return "Rock";
         }
 
-        public void AskCategoryQuestion(String category, Game game_)
+        public void AskCategoryQuestion(String category)
         {
             if (category == "Pop")
             {

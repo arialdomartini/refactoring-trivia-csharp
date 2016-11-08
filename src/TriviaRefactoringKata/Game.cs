@@ -30,7 +30,7 @@ namespace UglyTrivia
         {
             questionDeck = new QuestionDeck(this);
 
-            questionDeck.FillQuestions(this);
+            questionDeck.FillQuestions();
         }
 
         public LinkedList<String> PopQuestions
@@ -122,7 +122,7 @@ namespace UglyTrivia
 
         private void askQuestion()
         {
-            questionDeck.AskCategoryQuestion(currentCategory(), this);
+            questionDeck.AskCategoryQuestion(currentCategory());
         }
 
         private String currentCategory()
