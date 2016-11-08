@@ -14,7 +14,8 @@ namespace Trivia
                 Console.SetOut(writer);
                 for (int i = 0; i < 1; i++)
                 {
-                    GameRunner.Run(new Random(7));
+                    var seed = i;
+                    GameRunner.Run(new Random(seed));
                 }
             }
         }
