@@ -16,6 +16,10 @@ namespace FizzBuzzRefactoringKata
         [InlineData(2, "2")]
         [InlineData(4, "4")]
         [InlineData(8, "8")]
+        [InlineData(7, "Yo")]
+        [InlineData(7 * 3, "FizzYo")]
+        [InlineData(7 * 5, "BuzzYo")]
+        [InlineData(7 * 3 * 5, "FizzBuzzYo")]
         public void SingleNumber(Int32 input, String expected)
         {
             Assert.Equal(expected, FizzBuzz.Say(input));
