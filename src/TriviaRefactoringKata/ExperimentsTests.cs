@@ -9,10 +9,11 @@ namespace Trivia
         [Fact]
         public void Blah()
         {
-            var writer = new StringWriter();
-            Console.SetOut(writer);
-            GameRunner.Main(null);
-            Assert.Equal("", writer.ToString());
+            using (var writer = File.CreateText("output.txt"))
+            {
+                Console.SetOut(writer);
+                GameRunner.Main(null);
+            }
         }
     }
 }
