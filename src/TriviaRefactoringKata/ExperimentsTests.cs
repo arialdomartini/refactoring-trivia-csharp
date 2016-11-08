@@ -9,7 +9,7 @@ namespace Trivia
         [Fact]
         public void Blah()
         {
-            using (var writer = File.CreateText("output.txt"))
+            using (var writer = File.CreateText("output1.txt"))
             {
                 Console.SetOut(writer);
                 GameRunner.Main(null);
