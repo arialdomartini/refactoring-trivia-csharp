@@ -12,7 +12,7 @@ namespace Trivia
             using (var writer = File.CreateText("output1.txt"))
             {
                 Console.SetOut(writer);
-                GameRunner.Main(null);
+                GameRunner.Run(new Random(7));
             }
         }
     }

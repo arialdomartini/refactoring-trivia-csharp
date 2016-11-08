@@ -18,7 +18,7 @@ namespace Trivia
             Run(rand);
         }
 
-        static void Run(Random rand)
+        public static void Run(Random rand)
         {
             Game aGame = new Game();
 
