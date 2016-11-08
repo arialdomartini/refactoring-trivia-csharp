@@ -6,9 +6,11 @@ namespace Trivia
 {
     public class QuestionDeck
     {
+        readonly Game game;
+
         public QuestionDeck(Game game)
         {
-            
+            this.game = game;
         }
 
         public String createRockQuestion(int index)
@@ -16,7 +18,7 @@ namespace Trivia
             return "Rock Question " + index;
         }
 
-        public void FillQuestions(Game game)
+        public void FillQuestions(Game game_)
         {
             for (int i = 0; i < 50; i++)
             {
@@ -41,7 +43,7 @@ namespace Trivia
             return "Rock";
         }
 
-        public void AskCategoryQuestion(String category, Game game)
+        public void AskCategoryQuestion(String category, Game game_)
         {
             if (category == "Pop")
             {
