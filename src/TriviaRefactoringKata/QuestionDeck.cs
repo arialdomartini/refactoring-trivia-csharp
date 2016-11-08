@@ -16,10 +16,10 @@ namespace Trivia
         public QuestionDeck(Game game)
         {
             this.game = game;
-            popQuestions = this.game.PopQuestions;
-            scienceQuestions = this.game.ScienceQuestions;
-            sportsQuestions = this.game.SportsQuestions;
-            rockQuestions = this.game.RockQuestions;
+            popQuestions = game.PopQuestions;
+            scienceQuestions = game.ScienceQuestions;
+            sportsQuestions = game.SportsQuestions;
+            rockQuestions = game.RockQuestions;
         }
 
         public String createRockQuestion(int index)
