@@ -147,6 +147,11 @@ namespace UglyTrivia
 
         private String currentCategory()
         {
+            return CurrentCategoryPlace();
+        }
+
+        String CurrentCategoryPlace()
+        {
             if (places[currentPlayer] == 0) return "Pop";
             if (places[currentPlayer] == 4) return "Pop";
             if (places[currentPlayer] == 8) return "Pop";
