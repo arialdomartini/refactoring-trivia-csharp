@@ -353,6 +353,20 @@ What we have done is follow one of the Pragmatic Programmers tip:
 	Put Abstraction in Code and Details in Data.
 Aggregate all questions into a collection.
 
+## Retry Add New Requirement
+Now handle History Category is one line change.
+But the board was full, so we need to understand where place this new questions, so talk with business.
+The responses could be many: replace a old one with new, change distribution algorithm, doesn't add History anymore.
+In this case replace "Science" with "History".
+Run tests and let see what happens.
+Golden Master test break, it's ok.
+QuestionDeckTests break, it isn't ok.
+Revert replace.
+Why happens? Because QuestionDeck and it's tests works with hardcoded production data.
+We write tests in this style on purpuse because they are Characterization tests.
+But now this tests create friction, they are legacy tests.
+Before fix them, in order to show the differencies of style let's write tests for "CategoryQuestins".
+
 ## Write CategoryQuestions Tests
 Add class CategoryQuestionsTests
 Add "CheckPositionWithCorrectPlace" test. Add a "PlaceOn" method.
@@ -361,15 +375,6 @@ Add "ManyNextQuestions" test. Add a "AddQuestion" method.
 Add "NextQuestionWhenTerminated" test. Chose an Exception.
 Change method names in "IsOnPlace" and "NextQuestion".
 Use simple collection like List<> or Queue<>.
-
-## Retry Add New Requirement
-Now handle History Category is one line change.
-But the board was full, so we need to understand where place this new questions, so talk with business.
-The responses could be many, replace a old one with new, change distribution algorithm, doesn't add History anymore.
-In this case replace "Science" with "History".
-Golden Master test break, it's ok.
-QuestionnaireCharacterization tests break, it isn't ok.
-Revert and fix test.
 
 ## Get Feedback from QuestionDeck tests
 Are tests good? No, they are Characterization tests.
