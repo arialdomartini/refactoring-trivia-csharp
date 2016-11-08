@@ -427,5 +427,8 @@ But we did refactoring without a feature?
 There are non-functional requirements guided by non-functional feature.
 The tests are our first non-functional requirements stakeholders.
 
+## How to learn Refactoring
+TODO: talk about quick & dirty and deep practice
+
 ## The End
 Thanks a lot to had attended to this course!!!
