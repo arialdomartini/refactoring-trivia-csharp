@@ -28,7 +28,7 @@ namespace UglyTrivia
 
         public Game()
         {
-            questionDeck = new QuestionDeck();
+            questionDeck = new QuestionDeck(this);
 
             questionDeck.FillQuestions(this);
         }

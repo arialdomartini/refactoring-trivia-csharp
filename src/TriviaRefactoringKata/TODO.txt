@@ -8,7 +8,6 @@ Switch Statement in askQuestion and currentCategory
 
 # TO MOVE
 4 questions fields
-askQuestion
 
 # TO CLEAN
 inline currentCategory, it's only a bottleneck
