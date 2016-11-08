@@ -30,6 +30,11 @@ namespace UglyTrivia
         {
             questionDeck = new QuestionDeck();
 
+            FillQuestions();
+        }
+
+        void FillQuestions()
+        {
             for (int i = 0; i < 50; i++)
             {
                 popQuestions.AddLast("Pop Question " + i);
