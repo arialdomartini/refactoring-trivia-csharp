@@ -32,6 +32,7 @@ namespace Trivia
         [InlineData(12)]
         [InlineData(1234)]
         [InlineData(Int32.MaxValue)]
+        [InlineData(-1)]
         public void CategoryForOutOfBoardPlace(Int32 place)
         {
             var deck = new QuestionDeck();

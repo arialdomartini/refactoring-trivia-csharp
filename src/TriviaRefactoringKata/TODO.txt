@@ -8,3 +8,4 @@ Switch Statement in askQuestion and currentCategory
 inline currentCategory, it's only a bottleneck
 inline askQuestion, it's only a bottleneck
 Add AskQuestionForPlace method into QuestionDeck that internally call CurrentCategoryPlace and AskCategoryQuestion
+Change behaviour for out of board category
