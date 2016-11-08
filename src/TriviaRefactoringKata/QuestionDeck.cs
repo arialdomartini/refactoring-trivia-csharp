@@ -9,11 +9,17 @@ namespace Trivia
     {
         readonly Game game;
         readonly LinkedList<String> popQuestions;
+        readonly LinkedList<String> scienceQuestions;
+        readonly LinkedList<String> sportsQuestions;
+        readonly LinkedList<String> rockQuestions;
 
         public QuestionDeck(Game game)
         {
             this.game = game;
             popQuestions = this.game.PopQuestions;
+            scienceQuestions = this.game.ScienceQuestions;
+            sportsQuestions = this.game.SportsQuestions;
+            rockQuestions = this.game.RockQuestions;
         }
 
         public String createRockQuestion(int index)
@@ -26,9 +32,9 @@ namespace Trivia
             for (int i = 0; i < 50; i++)
             {
                 popQuestions.AddLast("Pop Question " + i);
-                game.ScienceQuestions.AddLast(("Science Question " + i));
-                game.SportsQuestions.AddLast(("Sports Question " + i));
-                game.RockQuestions.AddLast(this.createRockQuestion(i));
+                scienceQuestions.AddLast(("Science Question " + i));
+                sportsQuestions.AddLast(("Sports Question " + i));
+                rockQuestions.AddLast(this.createRockQuestion(i));
             }
         }
 
@@ -55,18 +61,18 @@ namespace Trivia
             }
             if (category == "Science")
             {
-                Console.WriteLine(game.ScienceQuestions.First());
-                game.ScienceQuestions.RemoveFirst();
+                Console.WriteLine(scienceQuestions.First());
+                scienceQuestions.RemoveFirst();
             }
             if (category == "Sports")
             {
-                Console.WriteLine(game.SportsQuestions.First());
-                game.SportsQuestions.RemoveFirst();
+                Console.WriteLine(sportsQuestions.First());
+                sportsQuestions.RemoveFirst();
             }
             if (category == "Rock")
             {
-                Console.WriteLine(game.RockQuestions.First());
-                game.RockQuestions.RemoveFirst();
+                Console.WriteLine(rockQuestions.First());
+                rockQuestions.RemoveFirst();
             }
         }
     }
