@@ -16,6 +16,9 @@ namespace Trivia
         [InlineData(2, "Sports")]
         [InlineData(6, "Sports")]
         [InlineData(10, "Sports")]
+        [InlineData(3, "Rock")]
+        [InlineData(7, "Rock")]
+        [InlineData(11, "Rock")]
         public void CategoryForBoardPlace(Int32 place, String expected)
         {
             var deck = new QuestionDeck();
