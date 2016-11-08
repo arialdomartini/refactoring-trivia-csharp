@@ -28,21 +28,6 @@ namespace UglyTrivia
             questionDeck.FillQuestions();
         }
 
-        public LinkedList<String> ScienceQuestions
-        {
-            get { return new LinkedList<string>(); }
-        }
-
-        public LinkedList<String> SportsQuestions
-        {
-            get { return new LinkedList<string>(); }
-        }
-
-        public LinkedList<String> RockQuestions
-        {
-            get { return new LinkedList<string>(); }
-        }
-
         public bool isPlayable()
         {
             return (howManyPlayers() >= 2);
