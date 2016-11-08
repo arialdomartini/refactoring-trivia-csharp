@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UglyTrivia;
 
@@ -7,10 +8,12 @@ namespace Trivia
     public class QuestionDeck
     {
         readonly Game game;
+        readonly LinkedList<String> popQuestions;
 
         public QuestionDeck(Game game)
         {
             this.game = game;
+            popQuestions = this.game.PopQuestions;
         }
 
         public String createRockQuestion(int index)
@@ -22,7 +25,7 @@ namespace Trivia
         {
             for (int i = 0; i < 50; i++)
             {
-                game.PopQuestions.AddLast("Pop Question " + i);
+                popQuestions.AddLast("Pop Question " + i);
                 game.ScienceQuestions.AddLast(("Science Question " + i));
                 game.SportsQuestions.AddLast(("Sports Question " + i));
                 game.RockQuestions.AddLast(this.createRockQuestion(i));
@@ -47,8 +50,8 @@ namespace Trivia
         {
             if (category == "Pop")
             {
-                Console.WriteLine(game.PopQuestions.First());
-                game.PopQuestions.RemoveFirst();
+                Console.WriteLine(popQuestions.First());
+                popQuestions.RemoveFirst();
             }
             if (category == "Science")
             {
