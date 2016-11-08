@@ -7,7 +7,6 @@ namespace Trivia
 {
     public class QuestionDeck
     {
-        readonly Game game;
         readonly LinkedList<String> popQuestions;
         readonly LinkedList<String> scienceQuestions;
         readonly LinkedList<String> sportsQuestions;
@@ -15,7 +14,6 @@ namespace Trivia
 
         public QuestionDeck(Game game)
         {
-            this.game = game;
             popQuestions = game.PopQuestions;
             scienceQuestions = game.ScienceQuestions;
             sportsQuestions = game.SportsQuestions;
