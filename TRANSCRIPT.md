@@ -346,6 +346,7 @@ The problem here is that the logic is duplicated only to handle different data.
 How we proceed? We make a new Object that concentrate only the logic and ask for data.
 This time we use another technique called Parallel Design.
 Add class "CategoryQuestions" and use Pop Category to shape the external API.
+Add "PlaceOn", "AddQuestion", "IsOnPlace" and "NextQuestion" methods.
 Don't leave the NotImplementedException, the code must run.
 Replace one by one the other categories.
 Encapsulate Field to expose "CategoryName" category.
@@ -360,34 +361,31 @@ The responses could be many: replace a old one with new, change distribution alg
 In this case replace "Science" with "History".
 Run tests and let see what happens.
 Golden Master test break, it's ok.
-QuestionDeckTests break, it isn't ok.
-Revert replace.
-Why happens? Because QuestionDeck and it's tests works with hardcoded production data.
-We write tests in this style on purpuse because they are Characterization tests.
-But now this tests create friction, they are legacy tests.
-Before fix them, in order to show the differencies of style let's write tests for "CategoryQuestins".
-
-## Write CategoryQuestions Tests
-Add class CategoryQuestionsTests
-Add "CheckPositionWithCorrectPlace" test. Add a "PlaceOn" method.
-Add "CheckPositionWithWrongPlace" test.
-Add "ManyNextQuestions" test. Add a "AddQuestion" method.
-Add "NextQuestionWhenTerminated" test. Chose an Exception.
-Change method names in "IsOnPlace" and "NextQuestion".
-Use simple collection like List<> or Queue<>.
+QuestionDeckTests break, it isn't ok, revert replace.
 
 ## Get Feedback from QuestionDeck tests
-Are tests good? No, they are Characterization tests.
 Tests are a great source of feedback because they use our code from a client point of view.
+Why tests breaks? Because QuestionDeck and it's tests works with hardcoded production data.
+We write tests in this style on purpuse because they are Characterization tests.
+But now this tests create frictions, they are legacy tests.
 In this case we see that:
-	- we miss the correlation from input and output of tests.
-	- when a category's data (like name) change many tests break.
-	- the scenario under test aren't clear.
-	- totally miss the boundary condition.
-Write better test, in parallel, in order to shape a better API.
+  - we miss the correlation from input and output of tests.
+  - when a category's data (like name) change many tests break (no behaviour change).
+  - the scenario under test aren't clear.
+  - totally miss the boundary condition.
+Before fix them, in order to show the differencies of style let's write tests for "CategoryQuestins".
+
+## Write CategoryQuestions tests
+Add class CategoryQuestionsTests
+Add "CheckPositionWithCorrectPlace" test.
+Add "CheckPositionWithWrongPlace" test.
+Add "ManyNextQuestions" test.
+Add "NextQuestionWhenTerminated" test. Chose an Exception.
+Use simple collection like List<>.
 
 ## Write QuestionDeck Tests
-Add class QuestionnaireTests.
+Write better test, in parallel, in order to shape a better API.
+Mark legacy tests with "_" and leave were they are.
 Rewrite "CategoryForInBoardPlace".
 Add a "AddCategory" method.
 Rename "CategoryPlace" to "CategoryOn".
@@ -396,10 +394,8 @@ Rewrite "AskDifferentCategoryQuestion".
 Rename "AskQuestion" to "NextQuestionFor".
 Rewrite "AskSameCategoryQuestion".
 Add "AskQuestionForUnknownCategory".
-
-## Remove QuestionDeck Characterization Tests
-Now that we have good test we can remove Characterization tests.
 Update production code to use new API.
+Now that we have good test we can remove tests marked with "_".
 
 ## Now Add New Requirement
 Replace "Science" with "History".
