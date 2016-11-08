@@ -30,14 +30,22 @@ namespace Trivia
 
         static void RunOneThousandGames()
         {
-            using (var writer = File.CreateText(ActualFile))
+            var original = Console.Out;
+            try
             {
-                Console.SetOut(writer);
-                for (var i = 0; i < 1000; i++)
+                using (var writer = File.CreateText(ActualFile))
                 {
-                    var seed = 34728 + 17 * i;
-                    GameRunner.Run(new Random(seed));
+                    Console.SetOut(writer);
+                    for (var i = 0; i < 1000; i++)
+                    {
+                        var seed = 34728 + 17 * i;
+                        GameRunner.Run(new Random(seed));
+                    }
                 }
+            }
+            finally
+            {
+               Console.SetOut(original); 
             }
         }
     }
