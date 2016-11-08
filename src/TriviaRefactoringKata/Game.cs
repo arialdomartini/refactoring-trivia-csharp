@@ -17,10 +17,6 @@ namespace UglyTrivia
 
         bool[] inPenaltyBox = new bool[6];
 
-        readonly LinkedList<string> scienceQuestions = new LinkedList<string>();
-        readonly LinkedList<string> sportsQuestions = new LinkedList<string>();
-        readonly LinkedList<string> rockQuestions = new LinkedList<string>();
-
         int currentPlayer = 0;
         bool isGettingOutOfPenaltyBox;
         readonly QuestionDeck questionDeck;
@@ -39,17 +35,17 @@ namespace UglyTrivia
 
         public LinkedList<String> ScienceQuestions
         {
-            get { return scienceQuestions; }
+            get { return new LinkedList<string>(); }
         }
 
         public LinkedList<String> SportsQuestions
         {
-            get { return sportsQuestions; }
+            get { return new LinkedList<string>(); }
         }
 
         public LinkedList<String> RockQuestions
         {
-            get { return rockQuestions; }
+            get { return new LinkedList<string>(); }
         }
 
         public bool isPlayable()
