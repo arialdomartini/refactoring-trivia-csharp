@@ -14,13 +14,14 @@ namespace Trivia
 
         public static void Main(String[] args)
         {
+            Random rand = new Random(7);
+
             Game aGame = new Game();
 
             aGame.add("Chet");
             aGame.add("Pat");
             aGame.add("Sue");
 
-            Random rand = new Random(7);
 
             do
             {
