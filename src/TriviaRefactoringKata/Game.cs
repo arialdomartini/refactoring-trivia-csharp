@@ -17,7 +17,6 @@ namespace UglyTrivia
 
         bool[] inPenaltyBox = new bool[6];
 
-        readonly LinkedList<string> popQuestions = new LinkedList<string>();
         readonly LinkedList<string> scienceQuestions = new LinkedList<string>();
         readonly LinkedList<string> sportsQuestions = new LinkedList<string>();
         readonly LinkedList<string> rockQuestions = new LinkedList<string>();
@@ -35,7 +34,7 @@ namespace UglyTrivia
 
         public LinkedList<String> PopQuestions
         {
-            get { return popQuestions; }
+            get { return new LinkedList<string>(); }
         }
 
         public LinkedList<String> ScienceQuestions
