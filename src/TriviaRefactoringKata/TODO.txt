@@ -1,13 +1,10 @@
 ﻿# FOUND SMELLS
-Divergent Changes in Game
 Data Clumps for all fields
 Shotgun Surgery for categories
 Primitive Obsession for question of same category
 Switch Statement in askQuestion and currentCategory
 
-
-# TO MOVE
-4 questions fields
-
-# TO CLEAN
+# MISC
 inline currentCategory, it's only a bottleneck
+inline askQuestion, it's only a bottleneck
+Add AskQuestionForPlace method into QuestionDeck that internally call CurrentCategoryPlace and AskCategoryQuestion
