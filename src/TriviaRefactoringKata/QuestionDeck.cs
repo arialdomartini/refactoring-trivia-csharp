@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UglyTrivia;
 
 namespace Trivia
@@ -33,6 +34,30 @@ namespace Trivia
             if (currentPlace == 6) return "Sports";
             if (currentPlace == 10) return "Sports";
             return "Rock";
+        }
+
+        public void AskCategoryQuestion(String category, Game game)
+        {
+            if (category == "Pop")
+            {
+                Console.WriteLine(game.PopQuestions.First());
+                game.PopQuestions.RemoveFirst();
+            }
+            if (category == "Science")
+            {
+                Console.WriteLine(game.ScienceQuestions.First());
+                game.ScienceQuestions.RemoveFirst();
+            }
+            if (category == "Sports")
+            {
+                Console.WriteLine(game.SportsQuestions.First());
+                game.SportsQuestions.RemoveFirst();
+            }
+            if (category == "Rock")
+            {
+                Console.WriteLine(game.RockQuestions.First());
+                game.RockQuestions.RemoveFirst();
+            }
         }
     }
 }

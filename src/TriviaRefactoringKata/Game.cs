@@ -122,33 +122,8 @@ namespace UglyTrivia
 
         private void askQuestion()
         {
-            AskCategoryQuestion(currentCategory());
+            questionDeck.AskCategoryQuestion(currentCategory(), this);
         }
-
-        void AskCategoryQuestion(String category)
-        {
-            if (category == "Pop")
-            {
-                Console.WriteLine(PopQuestions.First());
-                PopQuestions.RemoveFirst();
-            }
-            if (category == "Science")
-            {
-                Console.WriteLine(ScienceQuestions.First());
-                ScienceQuestions.RemoveFirst();
-            }
-            if (category == "Sports")
-            {
-                Console.WriteLine(SportsQuestions.First());
-                SportsQuestions.RemoveFirst();
-            }
-            if (category == "Rock")
-            {
-                Console.WriteLine(RockQuestions.First());
-                RockQuestions.RemoveFirst();
-            }
-        }
-
 
         private String currentCategory()
         {
