@@ -33,11 +33,16 @@ namespace UglyTrivia
             FillQuestions();
         }
 
+        public LinkedList<String> PopQuestions
+        {
+            get { return popQuestions; }
+        }
+
         void FillQuestions()
         {
             for (int i = 0; i < 50; i++)
             {
-                popQuestions.AddLast("Pop Question " + i);
+                PopQuestions.AddLast("Pop Question " + i);
                 scienceQuestions.AddLast(("Science Question " + i));
                 sportsQuestions.AddLast(("Sports Question " + i));
                 rockQuestions.AddLast(createRockQuestion(i));
@@ -120,8 +125,8 @@ namespace UglyTrivia
         {
             if (currentCategory() == "Pop")
             {
-                Console.WriteLine(popQuestions.First());
-                popQuestions.RemoveFirst();
+                Console.WriteLine(PopQuestions.First());
+                PopQuestions.RemoveFirst();
             }
             if (currentCategory() == "Science")
             {
