@@ -28,11 +28,6 @@ namespace UglyTrivia
             questionDeck.FillQuestions();
         }
 
-        public LinkedList<String> PopQuestions
-        {
-            get { return new LinkedList<string>(); }
-        }
-
         public LinkedList<String> ScienceQuestions
         {
             get { return new LinkedList<string>(); }

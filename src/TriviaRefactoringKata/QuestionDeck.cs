@@ -14,7 +14,7 @@ namespace Trivia
 
         public QuestionDeck(Game game)
         {
-            popQuestions = game.PopQuestions;
+            popQuestions = new LinkedList<string>();
             scienceQuestions = game.ScienceQuestions;
             sportsQuestions = game.SportsQuestions;
             rockQuestions = game.RockQuestions;
