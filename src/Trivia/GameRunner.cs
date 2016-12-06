@@ -14,17 +14,21 @@ namespace Trivia
 
         public static void Main(String[] args)
         {
+            new GameRunner().Run();
+        }
+
+        public void Run()
+        {
             Game aGame = new Game();
 
             aGame.add("Chet");
             aGame.add("Pat");
             aGame.add("Sue");
 
-            Random rand = new Random();
+            var rand = GenerateRandom();
 
             do
             {
-
                 aGame.roll(rand.Next(5) + 1);
 
                 if (rand.Next(9) == 7)
@@ -35,14 +39,13 @@ namespace Trivia
                 {
                     notAWinner = aGame.wasCorrectlyAnswered();
                 }
-
-
-
             } while (notAWinner);
-
         }
 
-
+        public virtual Random GenerateRandom()
+        {
+            return new Random();
+        }
     }
 
 }
