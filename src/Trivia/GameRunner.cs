@@ -20,7 +20,12 @@ namespace Trivia
             aGame.add("Pat");
             aGame.add("Sue");
 
-            Random rand = new Random();
+            Random rand;
+            int seed;
+            if(args != null && args.Length == 1 && Int32.TryParse(args[0], out seed))
+                rand = new Random(seed);
+            else
+                rand = new Random();
 
             do
             {
