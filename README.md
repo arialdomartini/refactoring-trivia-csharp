@@ -38,3 +38,27 @@ Exercise based on the [Trivia](https://github.com/caradojo/trivia) Legacy Code R
 * To achieve the previous step, encapsulate all the fields `FillQuestions()` needs to access, creating Bottlenecks.
 * `FillQuestions()` also accesses another `Game`'s method, `createRockQuestion()`: move it to `QuestionDeck` as well;
 
+## Move `CurrentCategory()` to `QuestionDeck`
+
+* We aim to move
+
+```csharp
+private String currentCategory()
+{
+    if (places[currentPlayer] == 0) return "Pop";
+    if (places[currentPlayer] == 4) return "Pop";
+    if (places[currentPlayer] == 8) return "Pop";
+    if (places[currentPlayer] == 1) return "Science";
+    if (places[currentPlayer] == 5) return "Science";
+    if (places[currentPlayer] == 9) return "Science";
+    if (places[currentPlayer] == 2) return "Sports";
+    if (places[currentPlayer] == 6) return "Sports";
+    if (places[currentPlayer] == 10) return "Sports";
+    return "Rock";
+}
+```
+
+to `QuestionDeck`;
+* First, make `places[currentPlayer]` a parameter to remove the duplication. To do so, create a Bottleneck for `currentCategory` extracting its body in a separate method;
+* Then refactor `places[currentPlayer]` as a parameter;
+* The resulting method won't contain any reference to `places[currentPlayer]`, and won't have but 1 single usage (the original `currentCategory()`), since it's a bottleneck; move it to `QuestionDeck`
