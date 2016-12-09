@@ -7,7 +7,15 @@ namespace UglyTrivia
 {
     public class Game
     {
+        public LinkedList<string> PopQuestions => _popQuestions;
+        public LinkedList<string> ScienceQuestions => _scienceQuestions;
+        public LinkedList<string> SportsQuestions => _sportsQuestions;
+        public LinkedList<string> RockQuestions => _rockQuestions;
 
+        readonly LinkedList<string> _popQuestions = new LinkedList<string>();
+        readonly LinkedList<string> _scienceQuestions = new LinkedList<string>();
+        readonly LinkedList<string> _sportsQuestions = new LinkedList<string>();
+        readonly LinkedList<string> _rockQuestions = new LinkedList<string>();
 
         List<string> players = new List<string>();
 
@@ -16,28 +24,14 @@ namespace UglyTrivia
 
         bool[] inPenaltyBox = new bool[6];
 
-        LinkedList<string> popQuestions = new LinkedList<string>();
-        LinkedList<string> scienceQuestions = new LinkedList<string>();
-        LinkedList<string> sportsQuestions = new LinkedList<string>();
-        LinkedList<string> rockQuestions = new LinkedList<string>();
-
         int currentPlayer = 0;
         bool isGettingOutOfPenaltyBox;
+        private QuestionDeck _questionDeck;
 
         public Game()
         {
-            for (int i = 0; i < 50; i++)
-            {
-                popQuestions.AddLast("Pop Question " + i);
-                scienceQuestions.AddLast(("Science Question " + i));
-                sportsQuestions.AddLast(("Sports Question " + i));
-                rockQuestions.AddLast(createRockQuestion(i));
-            }
-        }
-
-        public String createRockQuestion(int index)
-        {
-            return "Rock Question " + index;
+            _questionDeck = new QuestionDeck();
+            _questionDeck.FillQuestions(this);
         }
 
         public bool isPlayable()
@@ -111,23 +105,23 @@ namespace UglyTrivia
         {
             if (currentCategory() == "Pop")
             {
-                Console.WriteLine(popQuestions.First());
-                popQuestions.RemoveFirst();
+                Console.WriteLine(PopQuestions.First());
+                PopQuestions.RemoveFirst();
             }
             if (currentCategory() == "Science")
             {
-                Console.WriteLine(scienceQuestions.First());
-                scienceQuestions.RemoveFirst();
+                Console.WriteLine(ScienceQuestions.First());
+                ScienceQuestions.RemoveFirst();
             }
             if (currentCategory() == "Sports")
             {
-                Console.WriteLine(sportsQuestions.First());
-                sportsQuestions.RemoveFirst();
+                Console.WriteLine(SportsQuestions.First());
+                SportsQuestions.RemoveFirst();
             }
             if (currentCategory() == "Rock")
             {
-                Console.WriteLine(rockQuestions.First());
-                rockQuestions.RemoveFirst();
+                Console.WriteLine(RockQuestions.First());
+                RockQuestions.RemoveFirst();
             }
         }
 
@@ -210,5 +204,4 @@ namespace UglyTrivia
             return !(purses[currentPlayer] == 6);
         }
     }
-
 }

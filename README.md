@@ -29,3 +29,12 @@ Exercise based on the [Trivia](https://github.com/caradojo/trivia) Legacy Code R
 * Isolate it from the code, moving it to the top;
 * Extract the rest of the code in a separate method, which takes the non-deterministic value as a parameter;
 * Use the new method in the test, with a deterministic parameter.
+
+
+## Refactor `Game`'s constructor: move question creation to a dedicated class
+* Extract the business logic present in the constructor of `Game` to a separate method `FillQuestions()`
+* Move `FillQuestions()` in a separate `QuestionDeck` class; `Game`'s constructor will create an instance of `QuestionDeck` and will store it as an instance field;
+* Pass `FillQuestions()` the current instance of `Game` so it can stil access the needed fields. We will move them later;
+* To achieve the previous step, encapsulate all the fields `FillQuestions()` needs to access, creating Bottlenecks.
+* `FillQuestions()` also accesses another `Game`'s method, `createRockQuestion()`: move it to `QuestionDeck` as well;
+
