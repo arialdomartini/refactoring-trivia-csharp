@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using UglyTrivia;
 
 namespace Trivia
 {
     public class GameRunner
     {
-
-        private static bool notAWinner;
+        private static bool _notAWinner;
 
         public static void Main(String[] args)
         {
@@ -34,13 +29,13 @@ namespace Trivia
 
                 if (rand.Next(9) == 7)
                 {
-                    notAWinner = aGame.wrongAnswer();
+                    _notAWinner = aGame.wrongAnswer();
                 }
                 else
                 {
-                    notAWinner = aGame.wasCorrectlyAnswered();
+                    _notAWinner = aGame.wasCorrectlyAnswered();
                 }
-            } while (notAWinner);
+            } while (_notAWinner);
         }
     }
 

@@ -1,12 +1,12 @@
-﻿using System;
+﻿using UglyTrivia;
 
-namespace UglyTrivia
+namespace Trivia
 {
     public class QuestionDeck
     {
         public void FillQuestions(Game game)
         {
-            for (int i = 0; i < 50; i++)
+            for (var i = 0; i < 50; i++)
             {
                 game.PopQuestions.AddLast("Pop Question " + i);
                 game.ScienceQuestions.AddLast(("Science Question " + i));
@@ -15,7 +15,7 @@ namespace UglyTrivia
             }
         }
 
-        public String CreateRockQuestion(int index)
+        public string CreateRockQuestion(int index)
         {
             return "Rock Question " + index;
         }
