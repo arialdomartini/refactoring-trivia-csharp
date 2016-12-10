@@ -103,33 +103,8 @@ namespace UglyTrivia
 
         private void askQuestion()
         {
-            AskQuestionCategory(CurrentCategory());
+            _questionDeck.AskQuestionCategory(CurrentCategory(), this);
         }
-
-        public void AskQuestionCategory(string category)
-        {
-            if (category == "Pop")
-            {
-                Console.WriteLine(PopQuestions.First());
-                PopQuestions.RemoveFirst();
-            }
-            if (category == "Science")
-            {
-                Console.WriteLine(ScienceQuestions.First());
-                ScienceQuestions.RemoveFirst();
-            }
-            if (category == "Sports")
-            {
-                Console.WriteLine(SportsQuestions.First());
-                SportsQuestions.RemoveFirst();
-            }
-            if (category == "Rock")
-            {
-                Console.WriteLine(RockQuestions.First());
-                RockQuestions.RemoveFirst();
-            }
-        }
-
 
         private String CurrentCategory()
         {
