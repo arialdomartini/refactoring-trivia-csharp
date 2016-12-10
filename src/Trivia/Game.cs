@@ -76,7 +76,7 @@ namespace UglyTrivia
                     Console.WriteLine(players[currentPlayer]
                             + "'s new location is "
                             + places[currentPlayer]);
-                    Console.WriteLine("The category is " + currentCategory());
+                    Console.WriteLine("The category is " + CurrentCategory());
                     askQuestion();
                 }
                 else
@@ -95,7 +95,7 @@ namespace UglyTrivia
                 Console.WriteLine(players[currentPlayer]
                         + "'s new location is "
                         + places[currentPlayer]);
-                Console.WriteLine("The category is " + currentCategory());
+                Console.WriteLine("The category is " + CurrentCategory());
                 askQuestion();
             }
 
@@ -103,22 +103,27 @@ namespace UglyTrivia
 
         private void askQuestion()
         {
-            if (currentCategory() == "Pop")
+            AskQuestionCategory(CurrentCategory());
+        }
+
+        public void AskQuestionCategory(string category)
+        {
+            if (category == "Pop")
             {
                 Console.WriteLine(PopQuestions.First());
                 PopQuestions.RemoveFirst();
             }
-            if (currentCategory() == "Science")
+            if (category == "Science")
             {
                 Console.WriteLine(ScienceQuestions.First());
                 ScienceQuestions.RemoveFirst();
             }
-            if (currentCategory() == "Sports")
+            if (category == "Sports")
             {
                 Console.WriteLine(SportsQuestions.First());
                 SportsQuestions.RemoveFirst();
             }
-            if (currentCategory() == "Rock")
+            if (category == "Rock")
             {
                 Console.WriteLine(RockQuestions.First());
                 RockQuestions.RemoveFirst();
@@ -126,7 +131,7 @@ namespace UglyTrivia
         }
 
 
-        private String currentCategory()
+        private String CurrentCategory()
         {
             return _questionDeck.CurrentCategoryPlace(places[currentPlayer]);
         }

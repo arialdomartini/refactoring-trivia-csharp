@@ -62,3 +62,39 @@ to `QuestionDeck`;
 * First, make `places[currentPlayer]` a parameter to remove the duplication. To do so, create a Bottleneck for `currentCategory` extracting its body in a separate method;
 * Then refactor `places[currentPlayer]` as a parameter;
 * The resulting method won't contain any reference to `places[currentPlayer]`, and won't have but 1 single usage (the original `currentCategory()`), since it's a bottleneck; move it to `QuestionDeck`
+
+
+## Move `AskQuestion` to `QuestionDeck`
+
+* We aim to move 
+
+```csharp
+        private void askQuestion()
+        {
+            if (currentCategory() == "Pop")
+            {
+                Console.WriteLine(PopQuestions.First());
+                PopQuestions.RemoveFirst();
+            }
+            if (currentCategory() == "Science")
+            {
+                Console.WriteLine(ScienceQuestions.First());
+                ScienceQuestions.RemoveFirst();
+            }
+            if (currentCategory() == "Sports")
+            {
+                Console.WriteLine(SportsQuestions.First());
+                SportsQuestions.RemoveFirst();
+            }
+            if (currentCategory() == "Rock")
+            {
+                Console.WriteLine(RockQuestions.First());
+                RockQuestions.RemoveFirst();
+            }
+        }
+```
+
+to `QuestionDeck`
+* Since there are multiple usages of `QuestionDeck`, first create a bottleneck using Extract Method, generating a separate `AskQuestionCategory()` method;
+* Make `currentCategory()` one of its parameters with Extract Parameter;
+* Use Move to move `AskQuestionCategory()` to `QuestionDeck`.
