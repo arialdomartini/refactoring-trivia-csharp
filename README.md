@@ -103,4 +103,5 @@ to `QuestionDeck`
 
 * We aim to move `Game`'s fields to `QuestionDeck`
 * First inject the `Game` instance into `QuestionDeck` through constructor instead of through methods; that's another way to create a bottleneck, since we end up with one single reference to `Game`;
-* Now that there's one single reference to `Game`, move `Game`'s fields to `QuestionDeck`;
+* Now that there's one single reference to `Game`, move `Game`'s fields to `QuestionDeck`, using Extract Field;
+
