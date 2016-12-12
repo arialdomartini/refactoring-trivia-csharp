@@ -30,8 +30,8 @@ namespace UglyTrivia
 
         public Game()
         {
-            _questionDeck = new QuestionDeck();
-            _questionDeck.FillQuestions(this);
+            _questionDeck = new QuestionDeck(this);
+            _questionDeck.FillQuestions();
         }
 
         public bool isPlayable()
@@ -103,7 +103,7 @@ namespace UglyTrivia
 
         private void askQuestion()
         {
-            _questionDeck.AskQuestionCategory(CurrentCategory(), this);
+            _questionDeck.AskQuestionCategory(CurrentCategory());
         }
 
         private String CurrentCategory()
