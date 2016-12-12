@@ -30,7 +30,6 @@ Exercise based on the [Trivia](https://github.com/caradojo/trivia) Legacy Code R
 * Extract the rest of the code in a separate method, which takes the non-deterministic value as a parameter;
 * Use the new method in the test, with a deterministic parameter.
 
-
 ## Refactor `Game`'s constructor: move question creation to a dedicated class
 * Extract the business logic present in the constructor of `Game` to a separate method `FillQuestions()`
 * Move `FillQuestions()` in a separate `QuestionDeck` class; `Game`'s constructor will create an instance of `QuestionDeck` and will store it as an instance field;
@@ -62,7 +61,6 @@ to `QuestionDeck`;
 * First, make `places[currentPlayer]` a parameter to remove the duplication. To do so, create a Bottleneck for `currentCategory` extracting its body in a separate method;
 * Then refactor `places[currentPlayer]` as a parameter;
 * The resulting method won't contain any reference to `places[currentPlayer]`, and won't have but 1 single usage (the original `currentCategory()`), since it's a bottleneck; move it to `QuestionDeck`
-
 
 ## Move `AskQuestion` to `QuestionDeck`
 
@@ -104,4 +102,4 @@ to `QuestionDeck`
 * We aim to move `Game`'s fields to `QuestionDeck`
 * First inject the `Game` instance into `QuestionDeck` through constructor instead of through methods; that's another way to create a bottleneck, since we end up with one single reference to `Game`;
 * Now that there's one single reference to `Game`, move `Game`'s fields to `QuestionDeck`, using Extract Field;
-
+* Using Inline we can now remove all the references from `Game`.

@@ -7,16 +7,6 @@ namespace UglyTrivia
 {
     public class Game
     {
-        public LinkedList<string> PopQuestions => _popQuestions;
-        public LinkedList<string> ScienceQuestions => _scienceQuestions;
-        public LinkedList<string> SportsQuestions => _sportsQuestions;
-        public LinkedList<string> RockQuestions => _rockQuestions;
-
-        readonly LinkedList<string> _popQuestions = new LinkedList<string>();
-        readonly LinkedList<string> _scienceQuestions = new LinkedList<string>();
-        readonly LinkedList<string> _sportsQuestions = new LinkedList<string>();
-        readonly LinkedList<string> _rockQuestions = new LinkedList<string>();
-
         List<string> players = new List<string>();
 
         int[] places = new int[6];

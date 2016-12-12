@@ -14,10 +14,10 @@ namespace Trivia
 
         public QuestionDeck(Game game)
         {
-            _popQuestions = game.PopQuestions;
-            _scienceQuestions = game.ScienceQuestions;
-            _sportsQuestions = game.SportsQuestions;
-            _rockQuestions = game.RockQuestions;
+            _popQuestions = new LinkedList<string>();
+            _scienceQuestions = new LinkedList<string>();
+            _sportsQuestions = new LinkedList<string>();
+            _rockQuestions = new LinkedList<string>();
         }
 
         public void FillQuestions()
