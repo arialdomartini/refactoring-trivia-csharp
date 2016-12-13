@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="GoldenMasterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionDeckTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

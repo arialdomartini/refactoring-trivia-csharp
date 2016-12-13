@@ -104,3 +104,6 @@ to `QuestionDeck`
 * Now that there's one single reference to `Game`, move `Game`'s fields to `QuestionDeck`, using Extract Field;
 * Using Inline we can now remove all the references from `Game`.
 * Remove the injection of the unused `Game` instance into `QuestioDeck`
+
+## Cover `QuestionDeck` with unit tests
+* Write unit tests for `QuestionDeck`'s methods
