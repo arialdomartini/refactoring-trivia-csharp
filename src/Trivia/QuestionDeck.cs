@@ -46,6 +46,9 @@ namespace Trivia
             if (currentPlace == 2) return "Sports";
             if (currentPlace == 6) return "Sports";
             if (currentPlace == 10) return "Sports";
+            if (currentPlace == 3) return "Rock";
+            if (currentPlace == 7) return "Rock";
+            if (currentPlace == 11) return "Rock";
             return "Rock";
         }
 
