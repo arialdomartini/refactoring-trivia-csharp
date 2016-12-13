@@ -103,3 +103,4 @@ to `QuestionDeck`
 * First inject the `Game` instance into `QuestionDeck` through constructor instead of through methods; that's another way to create a bottleneck, since we end up with one single reference to `Game`;
 * Now that there's one single reference to `Game`, move `Game`'s fields to `QuestionDeck`, using Extract Field;
 * Using Inline we can now remove all the references from `Game`.
+* Remove the injection of the unused `Game` instance into `QuestioDeck`

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UglyTrivia;
 
 namespace Trivia
 {
@@ -12,7 +11,7 @@ namespace Trivia
         private readonly LinkedList<string> _sportsQuestions;
         private readonly LinkedList<string> _rockQuestions;
 
-        public QuestionDeck(Game game)
+        public QuestionDeck()
         {
             _popQuestions = new LinkedList<string>();
             _scienceQuestions = new LinkedList<string>();
