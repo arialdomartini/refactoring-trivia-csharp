@@ -104,3 +104,9 @@ to `QuestionDeck`
 * Now that there's one single reference to `Game`, move `Game`'s fields to `QuestionDeck`, using Extract Field;
 * Using Inline we can now remove all the references from `Game`.
 * Remove the injection of the unused `Game` instance into `QuestioDeck`
+
+## Move `Console.WriteLine()` up from `AskCategoryQuestion()`
+
+* We aim to remove the duplication of present in `AskCategoryQuestion`: there are multiple `Console.WriteLine()`;
+* Using `ExtractMethod`, `Split declaration and assignment`, `Move to outer scope`, `Merge variables`, `Rename` and `Inline` it's possible to move all the `Console.WriteLine()`s up in the caller method `Game.askQuestion()`
+* Once `AskCategoryQuestion()` returns a string rather than writing to the console, it's easy to cover its behavior with unit tests.

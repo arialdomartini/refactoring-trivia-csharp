@@ -49,29 +49,31 @@ namespace Trivia
             return "Rock";
         }
 
-        public void AskQuestionCategory(string category)
+        public string AskCategoryQuestion(string category)
         {
+            string question = null;
+
             if (category == "Pop")
             {
-                Console.WriteLine(_popQuestions.First());
+                question = _popQuestions.First();
                 _popQuestions.RemoveFirst();
             }
-            if (category == "Science")
+            else if (category == "Science")
             {
-                Console.WriteLine(_scienceQuestions.First());
+                question = _scienceQuestions.First();
                 _scienceQuestions.RemoveFirst();
             }
-            if (category == "Sports")
+            else if (category == "Sports")
             {
-                Console.WriteLine(_sportsQuestions.First());
+                question = _sportsQuestions.First();
                 _sportsQuestions.RemoveFirst();
             }
-            if (category == "Rock")
+            else if (category == "Rock")
             {
-                Console.WriteLine(_rockQuestions.First());
+                question = _rockQuestions.First();
                 _rockQuestions.RemoveFirst();
             }
+            return question;
         }
-
     }
 }
