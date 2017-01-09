@@ -110,3 +110,42 @@ to `QuestionDeck`
 * We aim to remove the duplication of present in `AskCategoryQuestion`: there are multiple `Console.WriteLine()`;
 * Using `ExtractMethod`, `Split declaration and assignment`, `Move to outer scope`, `Merge variables`, `Rename` and `Inline` it's possible to move all the `Console.WriteLine()`s up in the caller method `Game.askQuestion()`
 * Once `AskCategoryQuestion()` returns a string rather than writing to the console, it's easy to cover its behavior with unit tests.
+
+## Reuse `CreateRockQuestion()`
+
+* Looking at `FillQuestions()`'s code it's apparent that there is a missing reuse of the code implemented by `CreateRockQuestion()`
+```csharp
+public void FillQuestions()
+{
+    for (var i = 0; i < 50; i++)
+    {
+        _popQuestions.AddLast("Pop Question " + i);
+        _scienceQuestions.AddLast(("Science Question " + i));
+        _sportsQuestions.AddLast(("Sports Question " + i));
+        _rockQuestions.AddLast(CreateRockQuestion(i));
+    }
+}
+ public string CreateRockQuestion(int index)
+{
+    return "Rock Question " + index;
+}
+```
+* Using `Split string`, `Introduce parameter` and "Rename" convert to the code
+
+```csharp
+public void FillQuestions()
+{
+    for (var i = 0; i < 50; i++)
+    {
+        _popQuestions.AddLast(CreateQuestion(i, "Pop"));
+        _scienceQuestions.AddLast(CreateQuestion(i, "Science"));
+        _sportsQuestions.AddLast(CreateQuestion(i, "Sports"));
+        _rockQuestions.AddLast(CreateQuestion(i, "Rock"));
+    }
+}
+ public string CreateQuestion(int index, string category)
+{
+    return category + " Question " + index;
+}
+```
+

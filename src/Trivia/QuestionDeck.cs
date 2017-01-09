@@ -23,16 +23,16 @@ namespace Trivia
         {
             for (var i = 0; i < 50; i++)
             {
-                _popQuestions.AddLast("Pop Question " + i);
-                _scienceQuestions.AddLast(("Science Question " + i));
-                _sportsQuestions.AddLast(("Sports Question " + i));
-                _rockQuestions.AddLast(CreateRockQuestion(i));
+                _popQuestions.AddLast(CreateQuestion(i, "Pop"));
+                _scienceQuestions.AddLast(CreateQuestion(i, "Science"));
+                _sportsQuestions.AddLast(CreateQuestion(i, "Sports"));
+                _rockQuestions.AddLast(CreateQuestion(i, "Rock"));
             }
         }
 
-        public string CreateRockQuestion(int index)
+        public string CreateQuestion(int index, string category)
         {
-            return "Rock Question " + index;
+            return category + " Question " + index;
         }
 
         public string CurrentCategoryPlace(int currentPlace)
